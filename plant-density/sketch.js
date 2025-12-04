@@ -34,7 +34,10 @@ var colors = [];
 
 function setup() {
 	renderer = createCanvas(windowWidth, windowHeight, WEBGL);
-	
+
+	// 设置像素密度为1以确保跨平台一致性
+	pixelDensity(1);
+
 	// 设置初始camera距离
 	camera(0, 0, 500);
 	
