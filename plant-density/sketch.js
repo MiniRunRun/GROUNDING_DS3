@@ -255,13 +255,29 @@ function updateContainers(segment) {
 		if (topContainer) topContainer.classList.remove('active');
 		if (bottomContainer) bottomContainer.classList.remove('active');
 	}
-	
-	// 显示当前段落的容器
+
+	// 显示当前段落的容器并随机定位
 	const currentTopContainer = document.getElementById(`container-${segment + 1}-top`);
 	const currentBottomContainer = document.getElementById(`container-${segment + 1}-bottom`);
-	if (currentTopContainer) currentTopContainer.classList.add('active');
-	if (currentBottomContainer) currentBottomContainer.classList.add('active');
-	
+
+	if (currentTopContainer) {
+		// 随机位置 - top容器
+		const randomTop = Math.random() * (windowHeight - 200) + 50; // 50px到(windowHeight-150)px之间
+		const randomLeft = Math.random() * (windowWidth - 250) + 20; // 20px到(windowWidth-230)px之间
+		currentTopContainer.style.top = `${randomTop}px`;
+		currentTopContainer.style.left = `${randomLeft}px`;
+		currentTopContainer.classList.add('active');
+	}
+
+	if (currentBottomContainer) {
+		// 随机位置 - bottom容器
+		const randomTop = Math.random() * (windowHeight - 200) + 50;
+		const randomLeft = Math.random() * (windowWidth - 250) + 20;
+		currentBottomContainer.style.top = `${randomTop}px`;
+		currentBottomContainer.style.left = `${randomLeft}px`;
+		currentBottomContainer.classList.add('active');
+	}
+
 	console.log("显示段落:", segment + 1);
 }
 
