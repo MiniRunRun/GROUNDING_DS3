@@ -138,7 +138,7 @@ function setup() {
 }
 
 function draw() {
-	background(41, 123, 255); // 天蓝色
+	background(135, 206, 235); // 天蓝色
 	
 	// 初始自动旋转一圈
 	if (autoRotate && !rotationComplete) {
