@@ -138,7 +138,7 @@ function setup() {
 }
 
 function draw() {
-	background(135, 206, 235); // 天蓝色 RGB(135, 206, 235)
+	background (51, 197, 255); // 天蓝色 RGB(135, 206, 235)
 	
 	// 初始自动旋转一圈
 	if (autoRotate && !rotationComplete) {
