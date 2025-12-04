@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax Scroll Demo</title>
+    <link rel="stylesheet" href="../typefaces/GT-Pressura/GT-Pressura.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <!-- Fixed button in bottom right corner -->
+    <button id="modalButton" class="modal-button"></button>
+
+    <!-- Title box in bottom left corner -->
+    <div class="title-box" id="titleBox">
+        <div class="title-text">Grounding</div>
+        <div class="title-text">A Nature Simulation</div>
+    </div>
+
+    <!-- Tooltip that follows cursor -->
+    <div class="title-tooltip" id="titleTooltip"></div>
+
+    <!-- Green overlay at scroll bottom -->
+    <div class="green-overlay" id="greenOverlay"></div>
+
+    <!-- Navigation box in top left corner (shown only when modal is open) -->
+    <div class="nav-box" id="navBox">
+        <a href="../Plantdensity/plantD.html" class="nav-text">Plant Density</a>
+        <a href="../Sound Visualization/sound.html" class="nav-text">Sounds in Nature</a>
+        <a href="../Invasive Species Visualization/matching-game.html" class="nav-text">Invasive Species</a>
+        <a href="../soil erosion Visualization/index.html" class="nav-text">Soil Erosion</a>
+        <a href="../Lostgreen/Lostgreen.html" class="nav-text">Lost Green Spaces</a>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-title">
+            <h3>About Grounding</h3>
+        </div>
+        <div class="modal-content">
+            <p>Grounding is a Providence, Rhode Island based simulation of human interaction of nature. Based off of our experiences on a walk on a trail in Blackstone Park Conservancy, we included data that both shows the beauty of being in nature, as well as the powerful effect human activity can have on nature. We hope that through this experience, you realize the weight of your presence in nature, as well as your responsibility in preserving it.</p>
+            <br>
+            <p>Wondering what you can do to protect the green spaces around you? While in nature you should leave no trace and take nothing but pictures, you should take from us a tips keepsake for additional guidance!</p>
+            <br>
+            <p>Didn't see anything on your trip? Walk (scroll) slower!</p>
+        </div>
+        <div class="modal-button-container">
+            <button class="back-to-top" id="backToTop">Back to Start</button>
+        </div>
+    </div>
+
+    <div class="perspective-container">
+        <div class="parallax-group depth-1">
+            <div class="container">
+                <img src="/Image Assets/grounding bw.png" alt="Grounding BW" class="full-width">
+            </div>
+        </div>
+
+        <div class="parallax-group pGroup-image-1">
+            <div class="container">
+                <a href="../Plantdensity/plantD.html" class="green-link green-link-1">
+                    <img src="/Image Assets/tree1/tree1green.png" alt="Tree 1 Green" class="align-left green-image">
+                </a>
+            </div>
+        </div>
+
+        <div class="parallax-group pGroup-image-2">
+            <div class="container">
+                <img src="/Image Assets/no separation/tree3.png" alt="Tree 3" class="align-right">
+            </div>
+        </div>
+
+        <div class="parallax-group depth-2">
+            <div class="container">
+                <img src="/Image Assets/shrubA layer/shrubA.png" alt="Shrub A" class="align-left">
+            </div>
+        </div>
+
+        <!-- 3 pGroups between depth-2 and depth-3 -->
+        <div class="parallax-group pGroup-2-3-1">
+            <div class="container">
+                <a href="../Sound Visualization/sound.html" class="green-link green-link-2">
+                    <img src="/Image Assets/tree2/green 1.png" alt="Green 1" class="align-right green-image">
+                </a>
+            </div>
+        </div>
+
+        <div class="parallax-group pGroup-2-3-2">
+            <div class="container">
+                <img src="/Image Assets/no separation/tree number 4.png" alt="Tree 4" class="align-left">
+            </div>
+        </div>
+
+        <div class="parallax-group pGroup-2-3-3">
+            <div class="container">
+                <img src="/Image Assets/no separation/shrub2.png" alt="Shrub 2" class="align-right">
+            </div>
+        </div>
+
+        <div class="parallax-group depth-3">
+            <div class="container">
+                <a href="../Invasive Species Visualization/matching-game.html" class="green-link green-link-3">
+                    <img src="/Image Assets/shrubA layer/shrub green A.png" alt="Shrub Green A" class="align-left green-image">
+                </a>
+            </div>
+        </div>
+
+        <!-- 2 pGroups between depth-3 and depth-4 -->
+        <div class="parallax-group pGroup-3-4-1">
+            <div class="container">
+                <img src="/Image Assets/shrubB/shrub B.png" alt="Shrub B" class="align-left">
+            </div>
+        </div>
+
+        <div class="parallax-group pGroup-3-4-2">
+            <div class="container">
+                <img src="/Image Assets/tree2/tree 2.png" alt="Tree 2" class="align-right">
+            </div>
+        </div>
+
+        <div class="parallax-group depth-4">
+            <div class="container">
+                <a href="../soil erosion Visualization/index.html" class="green-link green-link-4">
+                    <img src="/Image Assets/tree3/tree3 green.png" alt="Tree 3 Green" class="align-left green-image">
+                </a>
+            </div>
+        </div>
+
+        <!-- 3 pGroups between depth-4 and depth-5 -->
+        <div class="parallax-group pGroup-4-5-1">
+            <div class="container">
+                <img src="/Image Assets/tree3/tree3 blank.png" alt="Tree 3 Blank" class="align-right">
+            </div>
+        </div>
+
+        <div class="parallax-group pGroup-4-5-2">
+            <div class="container">
+                <img src="/Image Assets/no separation/tree 2full.png" alt="Tree 2 Full" class="align-right">
+            </div>
+        </div>
+
+        <div class="parallax-group pGroup-4-5-3">
+            <div class="container">
+                <a href="../Lostgreen/Lostgreen.html" class="green-link green-link-5">
+                    <img src="/Image Assets/shrubB/shrub green B.png" alt="Shrub Green B" class="align-left green-image">
+                </a>
+            </div>
+        </div>
+
+        <div class="parallax-group depth-5">
+            <div class="container">
+                <img src="/Image Assets/no separation/shrub3.png" alt="Shrub 3" class="align-left">
+            </div>
+        </div>
+
+        <div class="parallax-group depth-6">
+            <div class="container">
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio elements for ambient sounds -->
+    <audio id="audio-airplane" preload="auto">
+        <source src="../Sound Visualization/sound Assets/airplane.wav" type="audio/wav">
+    </audio>
+    <audio id="audio-bike" preload="auto">
+        <source src="../Sound Visualization/sound Assets/bike.wav" type="audio/wav">
+    </audio>
+    <audio id="audio-bird" preload="auto">
+        <source src="../Sound Visualization/sound Assets/bird.wav" type="audio/wav">
+    </audio>
+    <audio id="audio-car2" preload="auto">
+        <source src="../Sound Visualization/sound Assets/car2.wav" type="audio/wav">
+    </audio>
+    <audio id="audio-children" preload="auto">
+        <source src="../Sound Visualization/sound Assets/children.wav" type="audio/wav">
+    </audio>
+    <audio id="audio-dog-bark" preload="auto">
+        <source src="../Sound Visualization/sound Assets/dog bark.wav" type="audio/wav">
+    </audio>
+    <audio id="audio-dogs-walking" preload="auto">
+        <source src="../Sound Visualization/sound Assets/dogs walking.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-duck" preload="auto">
+        <source src="../Sound Visualization/sound Assets/duck.wav" type="audio/wav">
+    </audio>
+    <audio id="audio-footstep" preload="auto">
+        <source src="../Sound Visualization/sound Assets/human foot step.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-insect" preload="auto">
+        <source src="../Sound Visualization/sound Assets/insect.wav" type="audio/wav">
+    </audio>
+    <audio id="audio-leaves" preload="auto">
+        <source src="../Sound Visualization/sound Assets/leaves.wav" type="audio/wav">
+    </audio>
+    <audio id="audio-siren" preload="auto">
+        <source src="../Sound Visualization/sound Assets/police-siren-sound-effect-240674.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-squirrel" preload="auto">
+        <source src="../Sound Visualization/sound Assets/squirrel.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-talking" preload="auto">
+        <source src="../Sound Visualization/sound Assets/talking.wav" type="audio/wav">
+    </audio>
+    <audio id="audio-woodpecker" preload="auto">
+        <source src="../Sound Visualization/sound Assets/woodpecker.wav" type="audio/wav">
+    </audio>
+
+    <script src="main.js"></script>
+</body>
+</html>

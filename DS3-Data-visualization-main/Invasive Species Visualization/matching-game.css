@@ -1,0 +1,786 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* ==========================================================================
+   FONTS
+   ========================================================================== */
+
+   @font-face {
+    font-family: 'GT-Pressura';
+    src: url('../typefaces/GT-Pressura/GT-Pressura-Regular-Trial.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GT Pressura Extended Medium';
+    src: url('../typefaces/GT-Pressura/GT-Pressura-Extended-Medium-Trial.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GT Pressura Extended Regular';
+    src: url('../typefaces/GT-Pressura/GT-Pressura-Extended-Regular-Trial.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* ==========================================================================
+   INTRO SCREEN
+   ========================================================================== */
+   .intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #972ef9;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: translateZ(0); /* 触发硬件加速 */
+}
+
+.intro-screen.wipeout::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: #ffffff;
+    animation: wipeTrail 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    z-index: 3;
+}
+
+.intro-screen.wipeout {
+    animation: wipeOut 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes wipeOut {
+    from {
+        clip-path: inset(0 0 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 100%);
+    }
+}
+
+@keyframes wipeTrail {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100vw);
+    }
+}
+
+.intro-text {
+    font-family: 'GT Pressura Extended Regular', sans-serif;
+    color: #000;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 移除负值 padding */
+    padding: 0;
+}
+
+.intro-text > span {
+    font-family: 'GT Pressura Extended Regular', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f3f3;
+    border: 4px solid #000;
+    white-space: nowrap;
+    font-size: 150px;
+    line-height: 1;
+    /* 使用合理的正数 padding */
+    padding: 0px 20px 10px 20px;;
+    width: fit-content;
+    box-sizing: border-box;
+    font-feature-settings: "cpsp" 1;
+    /* 移除定位属性 */
+    position: static;
+    margin-bottom: -3px;
+    overflow: hidden;
+}
+
+.intro-text > span.typing {
+    animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { border-right: 3px solid transparent; }
+    50% { border-right: 3px solid #000; }
+}
+
+
+/* ==================== Title Section (Left Bottom) ==================== */
+.title-box {
+    position: fixed;
+    left: 15px;
+    bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    z-index: 1000;
+}
+
+.title-text {
+    /* Typography */
+    font-family: 'GT Pressura Extended Medium', 'Arial Black', Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    line-height: 1;
+
+    /* Colors */
+    color: #000;
+    background-color: #fff;
+
+    /* Spacing */
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    margin-bottom: -3px;
+
+    /* Border */
+    border-top: 3px solid #000;
+    border-left: 3px solid #000;
+    border-right: 3px solid #000;
+    border-bottom: 3px solid #000;
+
+    /* Layout */
+    width: fit-content;
+    max-width: 100%;
+    position: relative;
+}
+
+.title-text:last-child {
+    margin-bottom: 0;
+}
+
+/* Pixelated border style */
+.flower-litter {
+    border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAYAAAAcaxDBAAAAAXNSR0IArs4c6QAAAbVJREFUeF7t2sFtwzAQRFGptVSQUlNBWrOvBi+DBT+NpfhzXXkkPQ4VJfB9+YMK3GiaYZegcAkEFRQWgONsqKCwABxnQwWFBeA4GyooLADH2VBBawKvn7/X5yfu/9+lJVoaXrv1NUcLCrsKKigsMBmXGpnmk6d/3r/vEliaCzoIJLA0F/RpoPSKd89LDZ5+D+0OQF+foLv9pUQ3oHse3tB0w2meLmj3efkZmsDSfHewdP2CJqHiXNAiWDq8DDoGnr7FRw9BU+WKc0GLYOlwQZNQcT4NWjzf4w8XFF5iQQWFBeC44xq6+r1ZUPiLD4IKOvfQc8vP+X3908dt+dXCgsLCgnYHXf3Qh+8fj8MbKii8RoIKigrgWx69ug3DBIUXTVBBYQE47viG0m8lgsJfdxRUUPah55af9EyAaZ5Of9yWT2BpLuggkMDSXNCngc6u+NiI7nnLn6HdAejrE3S391C6Ad3z8IamG07z9Fu0+1xQeIUEFRQWgOPwhq5+b4TvH48TFCYVVFBYAI5b3lD4etvHCQovkaCCwgJwnA0VFBaA42yooLAAHGdDBYUF4DgbKigsAMe9AYhBQGQGFg35AAAAAElFTkSuQmCC') 28 / 28px / 0 round;
+    border-width: 28px;
+    border-style: solid;
+}
+
+body {
+    font-family: 'GT Pressura', 'GT-Pressura', sans-serif;
+    background: #972ef9;
+    min-height: 100vh;
+    padding: 0;
+    overflow: hidden;
+}
+
+.wrap {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Left Section Styles */
+.left-section {
+    width: 420px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.info-section {
+    flex: 1;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: visible;
+}
+
+.matched-info {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    overflow: visible;
+}
+
+/* Species card - like a complete plant card */
+.species-card {
+    background: white;
+    padding: 10px 25px 25px 25px;
+    border: 3px solid #000;
+    border-radius: 0;
+    box-shadow: none;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(.5, 0, .2, 1);
+    --duration: 600ms;
+    height: 570px;
+    overflow: hidden;
+}
+
+/* Stacking effect - each card stacked with 20px offset */
+.species-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes slideUpCard {
+    from {
+        opacity: 0;
+        transform: translateY(100px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Title section - no border */
+.species-card h3 {
+    font-size: 1.3em;
+    margin: 0 0 15px 0;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    
+}
+
+/* Icon section - prominent */
+.species-icon {
+    font-size: 8em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    height: 250px;
+}
+
+.species-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Description section - no border */
+.species-card p {
+    font-size: 0.9em;
+    line-height: 1.15;
+    color: #333;
+    margin: 15px 0 0 0;
+    text-align: left;
+}
+
+.title-section {
+    margin-bottom: 30px;
+}
+
+.title-section h1 {
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1.2;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stats {
+    padding: 20px 0 0 0;
+    background: transparent;
+}
+
+.stat-item {
+    font-size: 1em;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.stat-item strong {
+    color: white;
+    font-weight: bold;
+}
+
+/* Game Container */
+.game-container {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 15px;
+}
+
+.game {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.card {
+    background:transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: visible;
+    transition: transform 0.1s ease;
+    border: none;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* 四角加号装饰 */
+.card::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 10;
+    background-image:
+        /* 左上角 */
+        linear-gradient(to right, white 0%, white 100%),
+        linear-gradient(to bottom, white 0%, white 100%),
+        /* 右上角 */
+        linear-gradient(to right, white 0%, white 100%),
+        linear-gradient(to bottom, white 0%, white 100%),
+        /* 左下角 */
+        linear-gradient(to right, white 0%, white 100%),
+        linear-gradient(to bottom, white 0%, white 100%),
+        /* 右下角 */
+        linear-gradient(to right, white 0%, white 100%),
+        linear-gradient(to bottom, white 0%, white 100%);
+    background-size:
+        /* 左上角 */
+        15px 2px, 2px 15px,
+        /* 右上角 */
+        15px 2px, 2px 15px,
+        /* 左下角 */
+        15px 2px, 2px 15px,
+        /* 右下角 */
+        15px 2px, 2px 15px;
+    background-position:
+        /* 左上角 */
+        0 0, 0 0,
+        /* 右上角 */
+        100% 0, 100% 0,
+        /* 左下角 */
+        0 100%, 0 100%,
+        /* 右下角 */
+        100% 100%, 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.card:hover:not(.revealed):not(.matched) {
+    transform: scale(1.2);
+    z-index: 100;
+}
+
+/* Card back (hidden state) */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4em;
+    font-weight: bold;
+    color: white;
+    background: #972ef9;
+    z-index: 2;
+    transition: transform 0.25s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+
+/* Card front (content) */
+.card-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4em;
+    z-index: 1;
+    background: transparent;
+    color: white;
+    transition: transform 0.25s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    padding: 15px;
+}
+
+.card-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Flip animation for reveal */
+.card.revealed::before {
+    transform: rotateY(180deg);
+}
+
+.card.revealed .card-content {
+    transform: rotateY(0deg);
+}
+
+/* Simple hide animation */
+.card.hiding::before {
+    transform: rotateY(0deg);
+}
+
+.card.hiding .card-content {
+    transform: rotateY(180deg);
+}
+
+/* Matched state */
+.card.matched {
+    animation: match-pulse 0.6s ease;
+    cursor: default;
+}
+
+@keyframes match-pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+        filter: brightness(1.1);
+    }
+}
+
+.card.matched .card-content {
+    opacity: 0.7;
+}
+
+
+/* Simple hide without animation */
+.card.hiding::before {
+    opacity: 1;
+}
+
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal {
+    background: white;
+    padding: 40px 15px 15px 15px;
+    border: 3px solid #000;
+    text-align: center;
+    max-width: 500px;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal {
+    transform: scale(1);
+}
+
+.winner {
+    font-size: 2.5em;
+    color: #000;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    animation: winner-bounce 0.5s ease infinite alternate;
+}
+
+@keyframes winner-bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
+.completion-stats {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.restart {
+    background: #d4ff00;
+    color: #000;
+    border: 3px solid #000;
+    padding: 10px 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    margin: 20px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'GT Pressura Extended', 'GT Pressura Extended Medium', sans-serif;
+}
+
+.restart:hover {
+    transform: translateY(-2px);
+    background: #d4ff00;
+}
+
+.restart:active {
+    transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .left-section {
+        width: 350px;
+        padding: 30px 25px;
+    }
+
+    .title-section h1 {
+        font-size: 1.6em;
+    }
+
+    .game-container {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .wrap {
+        flex-direction: column;
+    }
+
+    .left-section {
+        width: 100%;
+        max-height: 40vh;
+        padding: 25px;
+    }
+
+    .title-section h1 {
+        font-size: 1.4em;
+    }
+
+    .info-section {
+        margin-bottom: 20px;
+    }
+
+    .game-container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .game {
+        aspect-ratio: 3/4;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+
+    .card:nth-child(4n) {
+        border-right: 0;
+    }
+
+    .card:nth-child(3n) {
+        border-right: 3px solid white;
+    }
+
+    .card:nth-child(n+9) {
+        border-bottom: 0;
+    }
+
+    .card:nth-child(n+10) {
+        border-bottom: 3px solid white;
+    }
+
+    .card-content {
+        font-size: 3em;
+    }
+
+    .species-icon {
+        font-size: 6em;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game {
+        aspect-ratio: 2/3;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+    }
+
+    .card:nth-child(3n) {
+        border-right: 0;
+    }
+
+    .card:nth-child(2n) {
+        border-right: 3px solid white;
+    }
+
+    .card:nth-child(n+10) {
+        border-bottom: 0;
+    }
+
+    .card:nth-child(n+11) {
+        border-bottom: 3px solid white;
+    }
+
+    .card-content {
+        font-size: 2.5em;
+    }
+
+    .modal {
+        padding: 40px;
+    }
+
+    .winner {
+        font-size: 1.8em;
+    }
+
+    .species-card h3 {
+        font-size: 1em;
+        padding: 15px;
+    }
+
+    .species-icon {
+        font-size: 5em;
+        padding: 20px;
+    }
+
+    .species-card p {
+        padding: 15px;
+        font-size: 0.9em;
+    }
+}
+
+/* Info Modal Button - Fixed white circle in bottom right */
+.info-modal-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid white;
+    cursor: pointer;
+    z-index: 20000;
+    transition: transform 0.2s ease;
+}
+
+.info-modal-button:hover {
+    transform: scale(1.1);
+}
+
+/* Info Modal styles */
+.info-modal {
+    display: none;
+    position: fixed;
+    z-index: 25000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.info-modal-title {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    width: 80%;
+    max-width: 600px;
+    z-index: 25001;
+}
+
+.info-modal-title h3 {
+    font-family: 'GT Pressura Extended Medium', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    line-height: 1;
+    color: #000;
+    background-color: #fff;
+    padding: 5px;
+    border: 2px solid #000;
+    width: fit-content;
+    margin: 0;
+}
+
+.info-modal-content {
+    background-color: white;
+    position: absolute;
+    top: 56px;
+    right: 15px;
+    padding: 20px 20px 20px 20px;
+    border: 2px solid black;
+    width: 80%;
+    max-width: 600px;
+}
+
+.info-modal-content h2 {
+    margin-bottom: 20px;
+    font-family: 'GT-Pressura', sans-serif;
+}
+
+.info-modal-content p {
+    line-height: 1.2;
+    font-family: 'GT-Pressura', sans-serif;
+    margin-bottom: 10px;
+}

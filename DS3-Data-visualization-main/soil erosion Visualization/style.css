@@ -1,0 +1,328 @@
+/* ==========================================================================
+   FONTS
+   ========================================================================== */
+
+   @font-face {
+    font-family: 'GT-Pressura';
+    src: url('../typefaces/GT-Pressura/GT-Pressura-Regular-Trial.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GT Pressura Extended Medium';
+    src: url('../typefaces/GT-Pressura/GT-Pressura-Extended-Medium-Trial.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GT Pressura Extended Regular';
+    src: url('../typefaces/GT-Pressura/GT-Pressura-Extended-Regular-Trial.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* ==========================================================================
+   INTRO SCREEN
+   ========================================================================== */
+   .intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ff4200;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: translateZ(0); /* 触发硬件加速 */
+}
+
+.intro-screen.wipeout::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: #ffffff;
+    animation: wipeTrail 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    z-index: 3;
+}
+
+.intro-screen.wipeout {
+    animation: wipeOut 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes wipeOut {
+    from {
+        clip-path: inset(0 0 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 100%);
+    }
+}
+
+@keyframes wipeTrail {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100vw);
+    }
+}
+
+.intro-text {
+    font-family: 'GT Pressura Extended Regular', sans-serif;
+    color: #000;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 移除负值 padding */
+    padding: 0;
+}
+
+.intro-text > span {
+    font-family: 'GT Pressura Extended Regular', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f3f3;
+    border: 4px solid #000;
+    white-space: nowrap;
+    font-size: 150px;
+    line-height: 1;
+    /* 使用合理的正数 padding */
+    padding: 0px 20px 10px 20px;;
+    width: fit-content;
+    box-sizing: border-box;
+    font-feature-settings: "cpsp" 1;
+    /* 移除定位属性 */
+    position: static;
+    margin-bottom: -3px;
+    overflow: hidden;
+}
+
+.intro-text > span.typing {
+    animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { border-right: 3px solid transparent; }
+    50% { border-right: 3px solid #000; }
+}
+
+.layer-indicator {
+    position: fixed;
+    left: 15px;
+    top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    z-index: 1000;
+}
+
+.layer-text {
+    font-family: 'GT Pressura Extended Medium', 'Arial Black', Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    color: #000;
+    background-color: #fff;
+    border-top: 3px solid #000;
+    border-left: 3px solid #000;
+    border-right: 3px solid #000;
+    border-bottom: 3px solid #000;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    line-height: 1;
+    width: fit-content;
+    max-width: 100%;
+    margin-bottom: -3px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.layer-text:last-child {
+    margin-bottom: 0;
+}
+
+.layer-text.active {
+    background-color: #d4ff00;
+    color: #000;
+    transform: translateX(30px);
+}
+
+/* ==================== Title Section (Left Bottom) ==================== */
+.title-box {
+    position: fixed;
+    left: 15px;
+    bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    z-index: 1000;
+}
+
+.title-text {
+    /* Typography */
+    font-family: 'GT Pressura Extended Medium', 'Arial Black', Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    line-height: 1;
+
+    /* Colors */
+    color: #000;
+    background-color: #fff;
+
+    /* Spacing */
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    margin-bottom: -3px;
+
+    /* Border */
+    border-top: 3px solid #000;
+    border-left: 3px solid #000;
+    border-right: 3px solid #000;
+    border-bottom: 3px solid #000;
+
+    /* Layout */
+    width: fit-content;
+    max-width: 100%;
+    position: relative;
+}
+
+.title-text:last-child {
+    margin-bottom: 0;
+}
+
+/* Modal Button - Fixed white circle in bottom right */
+.modal-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid white;
+    cursor: pointer;
+    z-index: 20000;
+    transition: transform 0.2s ease;
+}
+
+.modal-button:hover {
+    transform: scale(1.1);
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 25000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-title {
+    position: absolute;
+    top: 20px;
+    right: 59px;
+    width: 80%;
+    max-width: 600px;
+    z-index: 25001;
+}
+
+.modal-title h3 {
+    font-family: 'GT Pressura Extended Medium', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    line-height: 1;
+    color: #000;
+    background-color: #fff;
+    padding: 5px;
+    border: 2px solid #000;
+    width: fit-content;
+    margin: 0;
+}
+
+.modal-content {
+    background-color: white;
+    position: absolute;
+    top: 56px;
+    right: 15px;
+    padding: 20px 20px 20px 20px;
+    border: 2px solid black;
+    width: 80%;
+    max-width: 600px;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    font-family: 'GT-Pressura', sans-serif;
+}
+
+.modal-content h3 {
+    text-align: center;
+    font-family: 'GT-Pressura', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    line-height: 1.2;
+    font-family: 'GT-Pressura', sans-serif;
+    margin-bottom: 3px;
+    margin-top: 0;
+}
+
+.close {
+    color: black;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.close:hover,
+.close:focus {
+    color: #666;
+}

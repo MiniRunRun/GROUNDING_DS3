@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Green Spaces | Providence, Rhode Island</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Modal button in bottom right corner -->
+    <button id="modalButton" class="modal-button"></button>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-title">
+            <h3>About</h3>
+        </div>
+        <div class="modal-content">
+            <p>This interactive map highlights green spaces in Providence, Rhode Island that have been lost or significantly altered over time due to human activity.</p>
+            <br>
+            <p><strong>How to use:</strong> Hover over or click the orange pins to see images and learn about each location. These spaces represent the environmental impact of urbanization on our city's natural landscape.</p>
+            <br>
+            <p>Understand how much influence human life, urban development and city governing has over the state of our green spaces.</p>
+        </div>
+    </div>
+
+    <!-- Intro Animation -->
+    <div class="intro-screen" id="intro-screen">
+        <div class="intro-text">
+            <span class="typing-effect">Lost</span>
+            <span class="typing-effect">Green Spaces</span>
+            <span class="typing-effect">in Providence</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 地图容器（保持纵横比），所有 pin 放入此容器中 -->
+        <div class="map" role="img" aria-label="Providence Map">
+        
+        <!-- Pin点们 -->
+        <div class="pin" data-pin="lippitt" style="left: 15.4%; top: 49.5%;">
+            <div class="pin-dot"></div>
+            <div class="popup-card">
+                <img src="images/A (dragged) 6.jpg" alt="Lippitt Hill">
+            </div>
+        </div>
+
+        <div class="pin" data-pin="station" style="left: 26.9%; top: 57.8%;">
+            <div class="pin-dot"></div>
+            <div class="popup-card">
+                <img src="images/A (dragged) 5.jpg" alt="Station Park">
+            </div>
+        </div>
+
+        <div class="pin" data-pin="district" style="left: 38.7%; top: 42.4%;">
+            <div class="pin-dot"></div>
+            <div class="popup-card">
+                <img src="images/A (dragged) 8.jpg" alt="195 District Park">
+            </div>
+        </div>
+
+        <div class="pin" data-pin="providence" style="left: 32.6%; top: 48.7%;">
+            <div class="pin-dot"></div>
+            <div class="popup-card">
+                <img src="images/A (dragged) 4.jpg" alt="Providence River">
+            </div>
+        </div>
+
+        <div class="pin" data-pin="collier" style="left: 48.1%; top: 36.4%;">
+            <div class="pin-dot"></div>
+            <div class="popup-card">
+                <img src="images/A (dragged) 3.jpg" alt="Collier Point Park">
+            </div>
+        </div>
+
+        <div class="pin" data-pin="south" style="left: 66.5%; top: 43.5%;">
+            <div class="pin-dot"></div>
+            <div class="popup-card">
+                <img src="images/A (dragged).jpg" alt="Lower South Providence">
+            </div>
+        </div>
+
+        <div class="pin" data-pin="waterfront" style="left: 77%; top: calc(23% + 50px);">
+            <div class="pin-dot"></div>
+            <div class="popup-card">
+                <img src="images/A (dragged) 2.jpg" alt="Allens Avenue Industrial Waterfront">
+            </div>
+        </div>
+
+        <div class="pin" data-pin="mashapaug" style="left: 77.7%; top: 85%;">
+            <div class="pin-dot"></div>
+            <div class="popup-card">
+                <img src="images/A (dragged) 9.jpg" alt="Mashapaug Pond">
+            </div>
+        </div>
+        
+        </div> <!-- /.map -->
+    </div>
+
+    <!-- Title Box -->
+    <div class="title-box">
+        <a href="../Main/main.html" style="text-decoration: none; display: contents;">
+            <div class="title-text" style="background-color: #d4ff00; cursor: pointer; position: relative; top: 5px;"><img src="../Image Assets/arrow.png" alt="" style="height: 24px; vertical-align: middle;"></div>
+        </a>
+        <div class="title-text">Lost</div>
+        <div class="title-text">Green Spaces</div>
+        <div class="title-text">in Providence</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,179 @@
+@font-face {
+  font-family: "GT-Pressura-Light-Trial";
+  src: url("GT-Pressura-Light-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Light-Italic-Trial";
+  src: url("GT-Pressura-Light-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Text-Trial";
+  src: url("GT-Pressura-Text-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Text-Italic-Trial";
+  src: url("GT-Pressura-Text-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Regular-Trial";
+  src: url("GT-Pressura-Regular-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Regular-Italic-Trial";
+  src: url("GT-Pressura-Regular-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Medium-Trial";
+  src: url("GT-Pressura-Medium-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Medium-Italic-Trial";
+  src: url("GT-Pressura-Medium-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Bold-Trial";
+  src: url("GT-Pressura-Bold-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Bold-Italic-Trial";
+  src: url("GT-Pressura-Bold-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Black-Trial";
+  src: url("GT-Pressura-Black-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Black-Italic-Trial";
+  src: url("GT-Pressura-Black-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Extended-Light-Trial";
+  src: url("GT-Pressura-Extended-Light-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Extended-Light-Italic-Trial";
+  src: url("GT-Pressura-Extended-Light-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Extended-Text-Trial";
+  src: url("GT-Pressura-Extended-Text-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Extended-Text-Italic-Trial";
+  src: url("GT-Pressura-Extended-Text-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Extended-Regular-Trial";
+  src: url("GT-Pressura-Extended-Regular-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Extended-Regular-Italic-Trial";
+  src: url("GT-Pressura-Extended-Regular-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Extended-Medium-Trial";
+  src: url("GT-Pressura-Extended-Medium-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Extended-Medium-Italic-Trial";
+  src: url("GT-Pressura-Extended-Medium-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Extended-Bold-Trial";
+  src: url("GT-Pressura-Extended-Bold-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Extended-Bold-Italic-Trial";
+  src: url("GT-Pressura-Extended-Bold-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Extended-Black-Trial";
+  src: url("GT-Pressura-Extended-Black-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Extended-Black-Italic-Trial";
+  src: url("GT-Pressura-Extended-Black-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Mono-Light-Trial";
+  src: url("GT-Pressura-Mono-Light-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Mono-Light-Italic-Trial";
+  src: url("GT-Pressura-Mono-Light-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Mono-Text-Trial";
+  src: url("GT-Pressura-Mono-Text-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Mono-Text-Italic-Trial";
+  src: url("GT-Pressura-Mono-Text-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Mono-Regular-Trial";
+  src: url("GT-Pressura-Mono-Regular-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Mono-Regular-Italic-Trial";
+  src: url("GT-Pressura-Mono-Regular-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Mono-Medium-Trial";
+  src: url("GT-Pressura-Mono-Medium-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Mono-Medium-Italic-Trial";
+  src: url("GT-Pressura-Mono-Medium-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Mono-Bold-Trial";
+  src: url("GT-Pressura-Mono-Bold-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Mono-Bold-Italic-Trial";
+  src: url("GT-Pressura-Mono-Bold-Italic-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Mono-Black-Trial";
+  src: url("GT-Pressura-Mono-Black-Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT-Pressura-Mono-Black-Italic-Trial";
+  src: url("GT-Pressura-Mono-Black-Italic-Trial.woff2") format("woff2");
+}

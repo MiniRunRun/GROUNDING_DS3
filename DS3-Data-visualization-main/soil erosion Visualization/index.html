@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Erosion Visualization - 5 Layers</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
+
+
+</head>
+<body>
+    <!-- Modal button in bottom right corner -->
+    <button id="modalButton" class="modal-button"></button>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-title">
+            <h3>About</h3>
+        </div>
+        <div class="modal-content">
+            <p>This interactive demonstrates how human activity, typically through walking, can cause unwanted soil erosion in nature.</p>
+            <br>
+            <p><strong>How to use:</strong> Drag your mouse across the screen to reveal the layers beneath the surface. Each drag reveals the next layer of soil composition.</p>
+            <br>
+            <p>In a walk across Blackstone park, the soil erosion was much more serious where trails converged, at the third turning point on the trail. Soil erosion occurs due to overuse. Try to choose paths that have more soil on them to avoid worsening the problem.</p>
+            <h3 style="margin-top: 30px;">Real Example of Soil Erosion on Blackstone Park Trail</h3>
+            <img src="../Image Assets/erosion new.png" alt="Soil Erosion" style="max-width: 80%; height: auto; margin-bottom: 20px; display: block; margin-left: auto; margin-right: 110px; margin-top: 40px;">
+        </div>
+    </div>
+
+    <script src="animation.js"></script>
+
+    <div class="intro-screen" id="intro-screen">
+    <div class="intro-text">
+        <span class="typing-effect">Consuming </span>
+        <span class="typing-effect">Soil Erosion</span>
+        <span class="typing-effect">Beneath </span>
+        <span class="typing-effect">Your Feet</span>
+    </div>
+</div>
+    <div class="title-box">
+        <a href="../Main/main.html" style="text-decoration: none; display: contents;">
+            <div class="title-text" style="background-color: #d4ff00; cursor: pointer; position: relative; top: 5px;"><img src="../Image Assets/arrow.png" alt="" style="height: 24px; vertical-align: middle;"></div>
+        </a>
+        <div class="title-text">Consuming Earth</div>
+       <div class="title-text">Soil Erosion</div>
+       <div class="title-text">Beneath Your Feet</div>
+   </div>
+
+    <div class="layer-indicator">
+        <span class="layer-text active"> ① Grass</span>
+        <span class="layer-text"> ② Damp Earth</span>
+        <span class="layer-text"> ③ Wood Chips</span>
+        <span class="layer-text"> ④ Sand</span>
+        <span class="layer-text"> ⑤ Rocks</span>
+    </div>
+   
+    <main></main>
+
+    <script>
+        // 5-Layer Erosion Visualization System
+        // Drag mouse to reveal next layer
+        // Green rectangles appear as animation on hover
+
+        // Layer images array (from top to bottom)
+        let layers = [];
+
+        // Brush settings - will be randomized for each reveal
+        let minBrushWidth = 10;
+        let maxBrushWidth = 60;
+        let minBrushHeight = 10;
+        let maxBrushHeight = 60;
+
+        // Canvas to store the current revealed state
+        let revealCanvas;
+
+        // Grid to track which layer is visible at each position
+        let layerGrid = [];
+        let gridSize = 20; // Size of each grid cell for tracking layer
+
+        // Track which cells have been dragged this frame to prevent multiple reveals per drag
+        let draggedCells = new Set();
+
+        // Green animation rectangles
+        let greenRects = [];
+        const GREEN_ANIMATION_INTERVAL = 4; // Show green rect every 0.2 seconds
+        let greenAnimationTimer = 0;
+
+        function preload() {
+            // Load 5 layers of images from assets folder
+            // Layer 0 is orange background (no image)
+            // Layer 1-5 are the actual images
+            layers[0] = loadImage('assets/Grass.jpg');
+            layers[1] = loadImage('assets/Dump Earth.jpg');
+            layers[2] = loadImage('assets/Woodchips.jpg');
+            layers[3] = loadImage('assets/Sand Dirt.jpg');
+            layers[4] = loadImage('assets/Gravel Road.jpg');
+        }
+
+        function setup() {
+            describe('A 5-layer interactive visualization that reveals deeper layers on mouse drag');
+
+            // Create fullscreen canvas
+            createCanvas(windowWidth, windowHeight);
+
+            // Hide cursor
+            noCursor();
+
+            // Resize all layer images
+            for (let i = 0; i < layers.length; i++) {
+                layers[i].resize(width, height);
+            }
+
+            // Create a graphics buffer to store the revealed state
+            revealCanvas = createGraphics(width, height);
+
+            // Set willReadFrequently for better performance with frequent copy operations
+            revealCanvas.drawingContext.willReadFrequently = true;
+
+            // Initialize layer grid
+            let cols = Math.ceil(width / gridSize);
+            let rows = Math.ceil(height / gridSize);
+
+            for (let x = 0; x < cols; x++) {
+                layerGrid[x] = [];
+                for (let y = 0; y < rows; y++) {
+                    layerGrid[x][y] = {
+                        currentLayer: 0 // Track which layer is currently visible
+                    };
+                }
+            }
+
+            // Set initial state - show orange background with text
+            revealCanvas.background('#ff4200');
+
+            // Draw "drag here" text in the center
+            revealCanvas.push();
+            revealCanvas.fill(255);
+            revealCanvas.textAlign(CENTER, CENTER);
+            revealCanvas.textSize(48);
+            revealCanvas.textFont('Arial');
+            revealCanvas.text('[drag here]', width / 2, height / 2);
+            revealCanvas.pop();
+
+            frameRate(20);
+        }
+
+        function draw() {
+            // Display the current reveal canvas state
+            image(revealCanvas, 0, 0);
+
+            // Update layer indicator based on mouse position
+            updateLayerIndicatorByMousePosition();
+
+            // Draw green animation rectangles on hover
+            greenAnimationTimer++;
+            if (mouseX >= 0 && mouseX < width && mouseY >= 0 && mouseY < height) {
+                if (greenAnimationTimer >= GREEN_ANIMATION_INTERVAL) {
+                    greenAnimationTimer = 0;
+                    addGreenRect(mouseX, mouseY);
+                }
+            }
+
+            // Draw and update green rectangles
+            drawGreenRects();
+
+            // Draw cursor indicator
+            drawCursorIndicator();
+        }
+
+        function mouseDragged() {
+            // Calculate grid position
+            let gridX = Math.floor(mouseX / gridSize);
+            let gridY = Math.floor(mouseY / gridSize);
+
+            // Create unique cell ID
+            let cellID = `${gridX},${gridY}`;
+
+            // Ensure grid position is valid and this cell hasn't been dragged yet in this drag session
+            if (gridX >= 0 && gridX < layerGrid.length &&
+                gridY >= 0 && gridY < layerGrid[0].length &&
+                !draggedCells.has(cellID)) {
+
+                let cell = layerGrid[gridX][gridY];
+
+                // Get the next layer to reveal (the one underneath)
+                let nextLayerIndex = cell.currentLayer + 1;
+
+                // Only reveal if there's a next layer available
+                // currentLayer 0 = orange background
+                // currentLayer 1 = Grass (layers[0])
+                // currentLayer 2 = Dump Earth (layers[1]), etc.
+                if (nextLayerIndex <= layers.length) {
+                    // Erase current layer by copying the next layer underneath
+                    // Array index is nextLayerIndex - 1 because layer 0 is orange (not in array)
+                    revealNextLayer(mouseX, mouseY, nextLayerIndex - 1);
+
+                    // Mark this cell as dragged
+                    draggedCells.add(cellID);
+                }
+            }
+        }
+
+        function mouseReleased() {
+            // When mouse is released, update all dragged cells to next layer
+            draggedCells.forEach(cellID => {
+                let [gridX, gridY] = cellID.split(',').map(Number);
+                if (gridX >= 0 && gridX < layerGrid.length &&
+                    gridY >= 0 && gridY < layerGrid[0].length) {
+                    layerGrid[gridX][gridY].currentLayer++;
+                }
+            });
+
+            // Clear dragged cells for next drag session
+            draggedCells.clear();
+        }
+
+        function addGreenRect(x, y) {
+            // Generate random width and height
+            let w = random(minBrushWidth, maxBrushWidth);
+            let h = random(minBrushHeight, maxBrushHeight);
+
+            // Generate random offset
+            let offsetX = random(-5, 5);
+            let offsetY = random(-5, 5);
+
+            // Add new green rectangle
+            greenRects.push({
+                x: x + offsetX,
+                y: y + offsetY,
+                w: w,
+                h: h,
+                alpha: 255,
+                life: 20 // Frames to live
+            });
+        }
+
+        function drawGreenRects() {
+            // Draw all yellow rectangles and remove them after a set time
+            push();
+            noStroke();
+
+            for (let i = greenRects.length - 1; i >= 0; i--) {
+                let r = greenRects[i];
+
+                // Draw yellow rectangle with full opacity (no fading)
+                fill('#d4ff00');
+                rect(r.x, r.y, r.w, r.h);
+
+                // Decrease life
+                r.life--;
+
+                // Remove if dead (directly disappear)
+                if (r.life <= 0) {
+                    greenRects.splice(i, 1);
+                }
+            }
+
+            pop();
+        }
+
+        function revealNextLayer(x, y, layerIndex) {
+            // Generate random width and height separately for rectangular reveal
+            let randomWidth = random(minBrushWidth, maxBrushWidth);
+            let randomHeight = random(minBrushHeight, maxBrushHeight);
+
+            // Generate random offset to make position vary slightly
+            let offsetX = random(-5, 5);
+            let offsetY = random(-5, 5);
+
+            let revealX = x + offsetX;
+            let revealY = y + offsetY;
+
+            // Copy from the actual image layer to the reveal canvas
+            revealCanvas.copy(
+                layers[layerIndex],
+                revealX, revealY, randomWidth, randomHeight,
+                revealX, revealY, randomWidth, randomHeight
+            );
+        }
+
+        function drawCursorIndicator() {
+            // Draw a simple circle cursor with average brush size
+            let avgBrushWidth = (minBrushWidth + maxBrushWidth) / 2;
+            let avgBrushHeight = (minBrushHeight + maxBrushHeight) / 2;
+            let avgSize = (avgBrushWidth + avgBrushHeight) / 2;
+
+            push();
+            noFill();
+            stroke(255, 200);
+            strokeWeight(2);
+            circle(mouseX, mouseY, avgSize);
+            pop();
+        }
+
+        function updateLayerIndicatorByMousePosition() {
+            // Get current layer at mouse position
+            if (mouseX >= 0 && mouseX < width && mouseY >= 0 && mouseY < height) {
+                let gridX = Math.floor(mouseX / gridSize);
+                let gridY = Math.floor(mouseY / gridSize);
+
+                if (gridX >= 0 && gridX < layerGrid.length &&
+                    gridY >= 0 && gridY < layerGrid[0].length) {
+
+                    let currentLayer = layerGrid[gridX][gridY].currentLayer;
+
+                    // Update UI to show only the current layer at mouse position
+                    // Layer 0 (orange) is not shown, so we start from Layer 1
+                    let layerTexts = document.querySelectorAll('.layer-text');
+                    layerTexts.forEach((text, index) => {
+                        // index 0 = Layer 1, index 1 = Layer 2, etc.
+                        // So we compare with currentLayer - 1
+                        if (currentLayer > 0 && index === currentLayer - 1) {
+                            text.classList.add('active');
+                        } else if (currentLayer === 0) {
+                            // When on Layer 0 (orange), don't highlight any
+                            text.classList.remove('active');
+                        } else {
+                            text.classList.remove('active');
+                        }
+                    });
+                }
+            }
+        }
+
+        function windowResized() {
+            // Handle window resize to fullscreen
+            resizeCanvas(windowWidth, windowHeight);
+
+            // Resize all layers
+            for (let i = 0; i < layers.length; i++) {
+                layers[i].resize(width, height);
+            }
+
+            // Recreate reveal canvas
+            revealCanvas = createGraphics(width, height);
+
+            // Set willReadFrequently for better performance
+            revealCanvas.drawingContext.willReadFrequently = true;
+
+            // Redraw orange background with text
+            revealCanvas.background('#ff4200');
+            revealCanvas.push();
+            revealCanvas.fill(255);
+            revealCanvas.textAlign(CENTER, CENTER);
+            revealCanvas.textSize(48);
+            revealCanvas.textFont('Arial');
+            revealCanvas.text('drag here', width / 2, height / 2);
+            revealCanvas.pop();
+
+            // Reinitialize layer grid
+            let cols = Math.ceil(width / gridSize);
+            let rows = Math.ceil(height / gridSize);
+
+            layerGrid = [];
+            for (let x = 0; x < cols; x++) {
+                layerGrid[x] = [];
+                for (let y = 0; y < rows; y++) {
+                    layerGrid[x][y] = {
+                        currentLayer: 0
+                    };
+                }
+            }
+        }
+
+        // Optional: Add keyboard controls for testing
+        function keyPressed() {
+            if (key === 'r' || key === 'R') {
+                // Reset to initial state - orange background with text
+                revealCanvas.background('#ff4200');
+                revealCanvas.push();
+                revealCanvas.fill(255);
+                revealCanvas.textAlign(CENTER, CENTER);
+                revealCanvas.textSize(48);
+                revealCanvas.textFont('Arial');
+                revealCanvas.text('drag here', width / 2, height / 2);
+                revealCanvas.pop();
+
+                // Reset layer grid
+                for (let x = 0; x < layerGrid.length; x++) {
+                    for (let y = 0; y < layerGrid[0].length; y++) {
+                        layerGrid[x][y].currentLayer = 0;
+                    }
+                }
+
+                // Clear green rectangles
+                greenRects = [];
+
+                // Reset layer indicator - remove all active states
+                let layerTexts = document.querySelectorAll('.layer-text');
+                layerTexts.forEach((text) => {
+                    text.classList.remove('active');
+                });
+            }
+        }
+    </script>
+
+    <script>
+        // Call intro animation when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            setupIntroAnimation();
+            setupModal();
+        });
+
+        // Setup modal functionality
+        function setupModal() {
+            const modal = document.getElementById('modal');
+            const btn = document.getElementById('modalButton');
+
+            // Open modal when button is clicked
+            btn.onclick = function() {
+                modal.style.display = 'block';
+            }
+
+            // Close modal when clicking outside of it
+            modal.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "Knopp-TRIALRegular";
+  src: url("Knopp-TRIALRegular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Knopp-TRIALSemiBold";
+  src: url("Knopp-TRIALSemiBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Knopp-TRIALBold";
+  src: url("Knopp-TRIALBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Knopp-TRIALExtraBold";
+  src: url("Knopp-TRIALExtraBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Knopp-TRIALBlack";
+  src: url("Knopp-TRIALBlack.woff") format("woff");
+}

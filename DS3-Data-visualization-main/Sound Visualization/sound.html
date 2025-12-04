@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Visualization - Blackstone Conservation District</title>
+    <link rel="preload" href="../typefaces/GT-Pressura/GT-Pressura-Extended-Medium-Trial.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="sound.css">
+    <script src="sound.js" defer></script>
+</head>
+<body>
+    <!-- Modal button in bottom right corner -->
+    <button id="modalButton" class="modal-button"></button>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-title">
+            <h3>About</h3>
+        </div>
+        <div class="modal-content">
+            <p>This interactive visualization maps natural and industrial sounds across a trail in the Blackstone Conservation District.</p>
+            <br>
+            <p><strong>How to use:</strong> Click on the sound icons to hear audio samples. Use the filter buttons to toggle between natural and industrial sounds. The vertical axis represents distance (far to close), while the horizontal axis shows the sound type (natural to industrial).</p>
+            <br>
+            <p>Experience how human activity like yours affects the natural soundscape of green spaces.</p>
+        </div>
+    </div>
+
+    <canvas id="pixelCanvas"></canvas>
+
+    <!-- Intro Animation -->
+    <div class="intro-screen" id="intro-screen">
+        <div class="intro-text">
+            <span class="typing-effect">SOUNDS</span>
+            <span class="typing-effect">HERE AND HEAR</span>
+            <span class="typing-effect">NATURAL</span>
+            <span class="typing-effect">AND UNNATUAL </span>
+        </div>
+    </div>
+
+    <!-- Description box -->
+    <div class="description-box" id="description-box">
+        <div class="title" id="description-title"></div>
+        <div class="body" id="description-body"></div>
+    </div>
+
+    <div class="container">
+        <!-- Crosshair lines -->
+        <div class="line line-horizontal"></div>
+        <div class="line line-vertical"></div>
+
+        <!-- Center point -->
+        <div class="center-point"></div>
+
+        <!-- Axis labels -->
+        <div class="label label-top">NATURAL</div>
+        <div class="label label-left">FAR</div>
+        <div class="label label-right">CLOSE</div>
+        <div class="label label-bottom">INDUSTRIAL</div>
+
+      
+
+        <div class="title-box">
+            <a href="../Main/main.html" style="text-decoration: none; display: contents;">
+                <div class="title-text" style="background-color: #d4ff00; cursor: pointer; position: relative; top: 5px;"><img src="../Image Assets/arrow.png" alt="" style="height: 24px; vertical-align: middle;"></div>
+            </a>
+             <div class="title-text">SOUND AND SIGHT</div>
+            <div class="title-text">HEAR AND HEAR</div>
+            <div class="title-text">NATURAL AND UNNATURAL</div>
+        </div>
+
+        <!-- Filter buttons in top-right -->
+        <div class="filter-box">
+            <div class="filter-btn active" data-filter="natural">NATURAL</div>
+            <div class="filter-btn active" data-filter="unnatural">UNNATURAL</div>
+        </div>
+<!-- 🐦 BIRD - Natural/Far (top-left quadrant) -->
+<div class="point" style="top: 22%; left: 28%;" data-label="Bird" data-audio="sound Assets/bird.wav" data-category="natural" data-description="The bird called from the canopy. A second answered. Nothing moved save the light between the branches."></div>
+
+<!-- 🌳 LEAVES - Natural/Close (top-right quadrant) -->
+<div class="point" style="top: 32%; left: 68%;" data-label="Leaves" data-audio="sound Assets/leaves.wav" data-category="natural" data-description="The wind passed through the leaves and they spoke among themselves. A dry voice. No listener. No reply."></div>
+
+<!-- 🦆 DUCK - Natural/Close (top-right quadrant) -->
+<div class="point" style="top: 18%; left: 77%;" data-label="Duck" data-audio="sound Assets/duck.wav" data-category="natural" data-description="They drifted on the pond like thoughts unspoken. The water held their voices in rings. Then the silence took it back."></div>
+
+<!-- 🐕 DOG BARK - Industrial/Far (bottom-left quadrant) -->
+<div class="point" style="top: 67%; left: 22%;" data-label="Dog Bark" data-audio="sound Assets/dog bark.wav" data-category="unnatural" data-description="From beyond the trees came the bark of a dog. Sharp and distant. As if to warn a world already warned."></div>
+
+<!-- 👶 CHILDREN - Industrial/Far (bottom-left quadrant) -->
+<div class="point" style="top: 73%; left: 38%;" data-label="Children" data-audio="sound Assets/children.wav" data-category="unnatural" data-description="Children laughed where no child could be seen. Their voices bright as coins in the dirt. Gone when you turned to look."></div>
+
+<!-- 🚗 CAR - Industrial/Close (bottom-right quadrant) -->
+<div class="point" style="top: 82%; left: 72%;" data-label="Car" data-audio="sound Assets/car2.wav" data-category="unnatural" data-description="The car passed. Only dust and the humming of what was no longer there."></div>
+
+<!-- 🚲 BIKE - Industrial/Close (bottom-right quadrant) -->
+<div class="point" style="top: 78%; left: 88%;" data-label="Bike" data-audio="sound Assets/bike.wav" data-category="unnatural" data-description="A wheel spinning. Rubber on grit. The sound of someone not waiting."></div>
+
+<!-- ✈️ AIRPLANE - Industrial/Close (right side) -->
+<div class="point" style="top: 58%; left: 82%;" data-label="Airplane" data-audio="sound Assets/airplane.wav" data-category="unnatural" data-description="It moved across the sky like a wound. The air split behind it. No birds flew."></div>
+
+<!-- 🐛 INSECT - Natural/Far (top-left quadrant) -->
+<div class="point" style="top: 28%; left: 17%;" data-label="Insect" data-audio="sound Assets/insect.wav" data-category="natural" data-description="It buzzed among the leaves. Small. Persistent. A machine built by nothing but hunger."></div>
+
+<!-- 🗣️ TALKING - Industrial/Close (center-right) -->
+<div class="point" style="top: 62%; left: 63%;" data-label="Talking" data-audio="sound Assets/talking.wav" data-category="unnatural" data-description="Voices crossed the trail like smoke. They did not pause. They belonged to no one I could see."></div>
+
+<!-- 🐦 WOODPECKER - Natural/Far (top-left quadrant) -->
+<div class="point" style="top: 12%; left: 23%;" data-label="Woodpecker" data-audio="sound Assets/woodpecker.wav" data-category="natural" data-description="Tapping. Measured. Like the counting of time with no numbers. The tree answered with its silence."></div>
+
+<!-- 🌊 RIVER RIPPLE - Natural/Far (top-left quadrant) -->
+<div class="point" style="top: 16%; left: 35%;" data-label="River Ripple" data-audio="sound Assets/river ripple.mov" data-category="natural" data-description="The river moved without need. Its music older than language. Stones listening. Stones forgetting."></div>
+
+<!-- 🚗 CAR (MOV) - Industrial/Close (bottom-right quadrant) -->
+<div class="point" style="top: 87%; left: 67%;" data-label="Car" data-audio="sound Assets/car.mov" data-category="unnatural" data-description="The car passed. A tremble in the earth. Then only dust and the humming of what was no longer there."></div>
+
+<!-- 🐝 BEE - Natural/Close (top-right quadrant) -->
+<div class="point" style="top: 26%; left: 83%;" data-label="Bee" data-audio="sound Assets/bee.mov" data-category="natural" data-description="A shape in the air. Its wings sang. It cared for neither me nor the flower."></div>
+
+<!-- 🚨 POLICE SIREN - Industrial/Close (bottom-right quadrant) -->
+<div class="point" style="top: 70%; left: 78%;" data-label="Police Siren" data-audio="sound Assets/police-siren-sound-effect-240674.mp3" data-category="unnatural" data-description="Urgent. Demanding. A scream. But again...?"></div>
+
+    </div>
+
+    <script>
+        // Setup modal functionality
+        function setupModal() {
+            const modal = document.getElementById('modal');
+            const btn = document.getElementById('modalButton');
+
+            // Open modal when button is clicked
+            btn.onclick = function() {
+                modal.style.display = 'block';
+            }
+
+            // Close modal when clicking outside of it
+            modal.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        }
+
+        // Call setup when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            setupModal();
+        });
+    </script>
+</body>
+</html>

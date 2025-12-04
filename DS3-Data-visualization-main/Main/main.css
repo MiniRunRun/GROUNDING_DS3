@@ -1,0 +1,624 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --scroll: 0px;
+    --visible: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #e6e6e6;
+    height: 12393.75px; /* End scroll at depth-6 position */
+}
+
+/* Navigation Box - Fixed in top left (shown only when modal is open) */
+.nav-box {
+    position: fixed;
+    left: 15px;
+    top: 15px;
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    z-index: 26000;
+}
+
+.nav-box.visible {
+    display: flex;
+}
+
+.nav-text {
+    /* Typography */
+    font-family: "GT-Pressura-Extended-Medium-Trial", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    line-height: 1;
+
+    /* Colors */
+    color: #000;
+    background-color: #fff;
+
+    /* Spacing */
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    margin-bottom: -3px;
+
+    /* Border */
+    border-top: 2px solid #000;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+
+    /* Layout */
+    width: fit-content;
+    max-width: 100%;
+    position: relative;
+
+    /* Link styling */
+    text-decoration: none;
+    cursor: pointer;
+
+    /* Transition for smooth hover effect */
+    transition: background-color 0.2s ease;
+}
+
+.nav-text:last-child {
+    margin-bottom: 0;
+}
+
+.nav-text:hover {
+    background-color: #d4ff00;
+}
+
+/* Individual positioning for each nav box */
+.nav-text:nth-child(1) {
+    /* ① Plant Density */
+}
+
+.nav-text:nth-child(2) {
+    /* ② Sound */
+}
+
+.nav-text:nth-child(3) {
+    /* ③ Invasive Species */
+    top: 1px;
+}
+
+.nav-text:nth-child(4) {
+    /* ④ Soil Erosion */
+    top: 2px;
+}
+
+.nav-text:nth-child(5) {
+    /* ⑤ Lost Green Spaces */
+    top: 3px;
+}
+
+/* Title Box - Fixed in bottom left */
+.title-box {
+    position: fixed;
+    left: 15px;
+    bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    z-index: 30000;
+    cursor: pointer;
+}
+
+/* Tooltip that follows cursor */
+.title-tooltip {
+    position: fixed;
+    background: white;
+    border: 2px solid black;
+    padding: 10px;
+    font-family: "GT-Pressura-Regular-Trial", sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: pre-line;
+    pointer-events: none;
+    z-index: 30000;
+    display: none;
+}
+
+.title-text {
+    /* Typography */
+    font-family: "GT-Pressura-Extended-Medium-Trial", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    line-height: 1;
+
+    /* Colors */
+    color: #000;
+    background-color: #fff;
+
+    /* Spacing */
+    padding: 5px 5px 8px 5px;
+    margin-bottom: -3px;
+
+    /* Border */
+    border-top: 3px solid #000;
+    border-left: 3px solid #000;
+    border-right: 3px solid #000;
+    border-bottom: 3px solid #000;
+
+    /* Layout */
+    width: fit-content;
+    max-width: 100%;
+    position: relative;
+}
+
+/* Modal Button - Fixed black circle in bottom right */
+.modal-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: black;
+    border: none;
+    cursor: pointer;
+    z-index: 20000;
+    transition: transform 0.2s ease;
+}
+
+.modal-button:hover {
+    transform: scale(1.1);
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 25000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-title {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    width: 80%;
+    max-width: 600px;
+    z-index: 25001;
+}
+
+.modal-title h3 {
+    font-family: "GT-Pressura-Extended-Medium-Trial", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    line-height: 1;
+    color: #000;
+    background-color: #fff;
+    padding: 5px;
+    border: 2px solid #000;
+    width: fit-content;
+}
+
+.modal-content {
+    background-color: white;
+    position: absolute;
+    top: 56px;
+    right: 15px;
+    padding: 20px 20px 20px 20px;
+    border: 2px solid black;
+    width: 80%;
+    max-width: 600px;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    font-family: "GT-Pressura-Regular-Trial", sans-serif;
+}
+
+.modal-content p {
+    line-height: 1.2;
+    font-family: "GT-Pressura-Regular-Trial", sans-serif;
+}
+
+.modal-content .credits {
+    font-size: 14px;
+    white-space: pre-line;
+}
+
+.close {
+    color: black;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.close:hover,
+.close:focus {
+    color: #666;
+}
+
+/* Perspective container - this creates the 3D space */
+.perspective-container {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    perspective: 600px; /* Same as HTML Review */
+    perspective-origin: center center;
+    transform-style: preserve-3d;
+    overflow: visible;
+}
+
+/* Each parallax group represents one "layer" at a different depth */
+/* Uses translateZ with --scroll variable like HTML Review */
+.parallax-group {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: calc(-6rem + 100vh);
+    margin: 0;
+    transform-style: preserve-3d;
+    overflow: visible;
+    pointer-events: none;
+}
+
+/* Container centers the content */
+.container {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    pointer-events: none;
+}
+
+/* Image styling */
+.container img {
+    max-width: 80vw;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    pointer-events: auto;
+}
+
+/* Non-link images have max-height constraint */
+.container > img {
+    max-height: 80vw;
+}
+
+/* Image alignment classes */
+.align-left,
+.green-link:has(.align-left) {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.align-right,
+.green-link:has(.align-right) {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+/* Full width image - covers entire page */
+.full-width {
+    width: 270vw !important;
+    max-width: 270vw !important;
+    max-height: none !important;
+    margin: 0 auto;
+}
+
+/* Green link wrapper */
+.green-link {
+    display: inline-block;
+    pointer-events: auto;
+    position: relative;
+    z-index: 1000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.green-link:hover {
+    z-index: 1001;
+}
+
+/* Green image hover effect */
+.green-image {
+    transition: filter 0.3s ease;
+    pointer-events: auto;
+    display: block;
+    max-height: 90vh;
+}
+
+.green-link:hover .green-image {
+    cursor: pointer;
+}
+
+/* Tooltip styling */
+.green-link {
+    position: relative;
+}
+
+.green-link::after {
+    content: 'see';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #d4ff00;
+    border: 3px solid black;
+    padding: 5px 5px 8px 5px;
+    font-family: "GT-Pressura-Extended-Medium-Trial", sans-serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    line-height: 1;
+    color: black;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 10000;
+}
+
+.green-link:hover::after,
+.parallax-group:hover .green-link::after {
+    opacity: 1;
+}
+
+/* Individual margin for each green link tooltip to match its image padding */
+.green-link-1::after {
+    margin-left: 250px;
+}
+
+.green-link-2::after {
+    margin-right: 50px;
+}
+
+.green-link-3::after {
+    /* No specific margin */
+}
+
+.green-link-4::after {
+    margin-left: 425px;
+}
+
+.green-link-5::after {
+    margin-top: 100px;
+}
+
+/* Different depth levels using translateZ with --scroll variable */
+/* Just like HTML Review: translateZ(calc(var(--scroll) - offset)) */
+/* z-index reversed: first group on top */
+/* Opacity fades based on scroll position */
+
+.depth-1 {
+    transform: translateZ(calc(var(--scroll) - 281.25px));
+    z-index: 20;
+    opacity: 1;
+}
+
+
+/* New parallax groups between depth-1 and depth-2 */
+/* Spacing reduced by 10%: 333.33px -> 300px intervals */
+
+.pGroup-image-1 {
+    transform: translateZ(calc(var(--scroll) - 993.75px));
+    z-index: 19;
+    opacity: 1;
+}
+
+.pGroup-image-1 img {
+    padding: 0;
+    padding-left: 250px;
+}
+
+.pGroup-2-3-1 img {
+    padding-right: 50px;
+}
+
+.pGroup-2-3-3 img {
+    max-height: 40vh;
+}
+
+.depth-4 img {
+    padding-left: 425px;
+}
+
+.pGroup-4-5-2 img {
+    padding-top: 70px;
+}
+
+.pGroup-4-5-3 img {
+    padding-top: 100px;
+}
+
+.pGroup-3-4-1 img {
+    padding-top: 105px;
+    padding-left: 50px;
+}
+
+.pGroup-image-2 {
+    transform: translateZ(calc(var(--scroll) - 1706.25px));
+    z-index: 18;
+    opacity: 1;
+}
+
+.depth-2 {
+    transform: translateZ(calc(var(--scroll) - 2418.75px));
+    z-index: 17;
+    opacity: 1;
+}
+
+
+/* 3 pGroups between depth-2 and depth-3 - spacing reduced by 10%: 250px -> 225px */
+.pGroup-2-3-1 {
+    transform: translateZ(calc(var(--scroll) - 3131.25px));
+    z-index: 16;
+    opacity: 1;
+}
+
+.pGroup-2-3-2 {
+    transform: translateZ(calc(var(--scroll) - 3843.75px));
+    z-index: 15;
+    opacity: 1;
+}
+
+.pGroup-2-3-3 {
+    transform: translateZ(calc(var(--scroll) - 4556.25px));
+    z-index: 14;
+    opacity: 1;
+}
+
+.depth-3 {
+    transform: translateZ(calc(var(--scroll) - 5268.75px));
+    z-index: 13;
+    opacity: 1;
+}
+
+
+/* 2 pGroups between depth-3 and depth-4 - spacing reduced by 10%: 333px -> 300px */
+.pGroup-3-4-1 {
+    transform: translateZ(calc(var(--scroll) - 5981.25px));
+    z-index: 12;
+    opacity: 1;
+}
+
+.pGroup-3-4-2 {
+    transform: translateZ(calc(var(--scroll) - 6693.75px));
+    z-index: 11;
+    opacity: 1;
+}
+
+.depth-4 {
+    transform: translateZ(calc(var(--scroll) - 7406.25px));
+    z-index: 10;
+    opacity: 1;
+}
+
+
+/* 3 pGroups between depth-4 and depth-5 - spacing reduced by 10%: 250px -> 225px */
+.pGroup-4-5-1 {
+    transform: translateZ(calc(var(--scroll) - 8118.75px));
+    z-index: 9;
+    opacity: 1;
+}
+
+.pGroup-4-5-2 {
+    transform: translateZ(calc(var(--scroll) - 8831.25px));
+    z-index: 8;
+    opacity: 1;
+}
+
+.pGroup-4-5-3 {
+    transform: translateZ(calc(var(--scroll) - 9543.75px));
+    z-index: 7;
+    opacity: 1;
+}
+
+.depth-5 {
+    transform: translateZ(calc(var(--scroll) - 10256.25px));
+    z-index: 6;
+    opacity: 1;
+}
+
+.depth-6 {
+    transform: translateZ(calc(var(--scroll) - 12393.75px));
+    z-index: 3;
+    opacity: 1;
+}
+
+
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* Custom scrollbar styling */
+.perspective-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.perspective-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.perspective-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+.perspective-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Green background overlay at scroll bottom */
+.green-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00B451;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 19000;
+}
+
+.green-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Modal button container */
+.modal-button-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    z-index: 25002;
+    display: none;
+    text-align: center;
+}
+
+.modal-button-container.visible {
+    display: block;
+}
+
+/* Back to top button */
+.back-to-top {
+    width: fit-content;
+    padding: 5px 20px;
+    background-color: white;
+    border: 2px solid black;
+    font-family: "GT-Pressura-Extended-Medium-Trial", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.back-to-top:hover {
+    background-color: #d4ff00;
+}

@@ -1,0 +1,99 @@
+/*
+ *
+ * INSTRUCTIONS
+ *
+ * Copy the Legal Disclaimer and the @font-faces statements to your regular CSS file.
+ * The font file(s) should be placed relative to the regular CSS file.
+ *
+ */
+
+/*
+ * Legal Disclaimer for Trial Licence licence
+ *
+ * Trial Licence
+ *
+ * Trial Web License for evaluation, testing and presentation purposes on internal domains without public access only.
+ * 
+ * The font files may not be distributed, published or used on any other domain(s).
+ * 
+ * Any further use is strictly prohibited.
+ *
+ * For internal test and presentation use only.
+ * For both print use and web / electronic use on internal domains without public access. Licencee may create documents / visuals / web pages etc. for the purpose of evaluation and presentation to clients or other interested parties.
+ * Any further use is strictly prohibited. The font files may not be distributed, published or used on any other domain(s).
+ *
+ */
+
+/* complete */
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-Light";
+  src: url("BradfordLLTrialWeb-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-LightItalic";
+  src: url("BradfordLLTrialWeb-LightItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-Regular";
+  src: url("BradfordLLTrialWeb-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-Italic";
+  src: url("BradfordLLTrialWeb-Italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-Book";
+  src: url("BradfordLLTrialWeb-Book.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-BookItalic";
+  src: url("BradfordLLTrialWeb-BookItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-Medium";
+  src: url("BradfordLLTrialWeb-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-MediumItalic";
+  src: url("BradfordLLTrialWeb-MediumItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-Bold";
+  src: url("BradfordLLTrialWeb-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-BoldItalic";
+  src: url("BradfordLLTrialWeb-BoldItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-ExtraBold";
+  src: url("BradfordLLTrialWeb-ExtraBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-ExtraBoldItalic";
+  src: url("BradfordLLTrialWeb-ExtraBoldItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-Black";
+  src: url("BradfordLLTrialWeb-Black.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BradfordLLTrialWeb-BlackItalic";
+  src: url("BradfordLLTrialWeb-BlackItalic.woff2") format("woff2");
+}
+
+

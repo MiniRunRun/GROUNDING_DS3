@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find the Invasive Species</title>
+    <style>
+        @font-face {
+            font-family: 'GT Pressura';
+            src: url('../typefaces/GT-Pressura/GT-Pressura-Regular-Trial.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+    <link rel="stylesheet" href="matching-game.css">
+</head>
+<body>
+    <!-- Info Modal button in bottom right corner -->
+    <button id="infoModalButton" class="info-modal-button"></button>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="info-modal">
+        <div class="info-modal-title">
+            <h3>About</h3>
+        </div>
+        <div class="info-modal-content">
+            <p>This game helps you identify common invasive plant species found in Blackstone Park in Providence, Rhode Island.</p>
+            <br>
+            <p><strong>How to play:</strong> Match the silhouettes of invasive plants with their real-world photos. Click on pairs to match them and learn more about each species.</p>
+            <br>
+            <p>Understanding invasive species is crucial for protecting local ecosystems and native plant biodiversity. Try to plant native species when you have the choice, to avoid contributing to the problem!</p>
+        </div>
+    </div>
+
+    <div class="intro-screen" id="intro-screen">
+    <div class="intro-text">
+        <span class="typing-effect">Those</span>
+        <span class="typing-effect">Silent Invaders</span>
+        <span class="typing-effect">in the green </span>
+    </div>
+</div>
+    <div class="title-box">
+        <a href="../Main/main.html" style="text-decoration: none; display: contents;">
+            <div class="title-text" style="background-color: #d4ff00; cursor: pointer; position: relative; top: 5px;"><img src="../Image Assets/arrow.png" alt="" style="height: 24px; vertical-align: middle;"></div>
+        </a>
+        <div class="title-text">Those</div>
+       <div class="title-text"> Silent Invaders </div>
+       <div class="title-text">in the green</div>
+
+   </div>
+
+    <div class="wrap">
+        <div class="left-section">
+            <div class="info-section">
+                <div id="matched-info" class="matched-info">
+                    <!-- Matched species info will appear here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <div class="game"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay">
+        <div class="modal">
+            <h2 class="winner">ALL INVASIVE SPECIES FOUND!</h2>
+            <p class="completion-stats"></p>
+            <button class="restart">Play Again</button>
+        </div>
+    </div>
+    <script src="type.js"></script>
+    <script src="animation.js"></script>
+    <script src="matching-game.js"></script>
+
+    <script>
+        // Setup info modal functionality
+        function setupInfoModal() {
+            const infoModal = document.getElementById('infoModal');
+            const infoBtn = document.getElementById('infoModalButton');
+
+            // Open info modal when button is clicked
+            infoBtn.onclick = function() {
+                infoModal.style.display = 'block';
+            }
+
+            // Close info modal when clicking outside of it
+            infoModal.onclick = function(event) {
+                if (event.target == infoModal) {
+                    infoModal.style.display = 'none';
+                }
+            }
+        }
+
+        // Call setup when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            setupInfoModal();
+        });
+    </script>
+</body>
+</html>
