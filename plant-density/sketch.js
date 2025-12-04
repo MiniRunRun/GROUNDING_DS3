@@ -18,6 +18,7 @@ const totalSegments = 10; // 总共10个段落
 const segmentAngle = (2 * Math.PI) / totalSegments; // 每段角度
 let currentSegment = 0; // 当前段落
 let previousSegment = -1; // 上一个段落
+let currentZIndex = 1000; // 全局 z-index 计数器，确保新容器始终在最上层
 
 // 渐变颜色定义
 const gradientColors = [
@@ -138,7 +139,7 @@ function setup() {
 }
 
 function draw() {
-	background(135, 206, 235); // 天蓝色
+	background(107, 186, 255); // 天蓝色
 	
 	// 初始自动旋转一圈
 	if (autoRotate && !rotationComplete) {
@@ -328,7 +329,7 @@ function updateContainers(segment) {
 
 		currentTopContainer.style.top = `${topTop}px`;
 		currentTopContainer.style.left = `${topLeft}px`;
-		currentTopContainer.style.zIndex = 1000 + (segment * 2);
+		currentTopContainer.style.zIndex = currentZIndex++;
 		currentTopContainer.classList.add('active');
 
 		// 添加到已存在容器列表
@@ -377,7 +378,7 @@ function updateContainers(segment) {
 
 		currentBottomContainer.style.top = `${bottomTop}px`;
 		currentBottomContainer.style.left = `${bottomLeft}px`;
-		currentBottomContainer.style.zIndex = 1000 + (segment * 2) + 1;
+		currentBottomContainer.style.zIndex = currentZIndex++;
 		currentBottomContainer.classList.add('active');
 	} else if (currentTopContainer) {
 		// 如果只有top容器 (472x517)
@@ -420,7 +421,7 @@ function updateContainers(segment) {
 
 		currentTopContainer.style.top = `${topTop}px`;
 		currentTopContainer.style.left = `${topLeft}px`;
-		currentTopContainer.style.zIndex = 1000 + (segment * 2);
+		currentTopContainer.style.zIndex = currentZIndex++;
 		currentTopContainer.classList.add('active');
 	} else if (currentBottomContainer) {
 		// 如果只有bottom容器 (420x465)
@@ -463,7 +464,7 @@ function updateContainers(segment) {
 
 		currentBottomContainer.style.top = `${bottomTop}px`;
 		currentBottomContainer.style.left = `${bottomLeft}px`;
-		currentBottomContainer.style.zIndex = 1000 + (segment * 2) + 1;
+		currentBottomContainer.style.zIndex = currentZIndex++;
 		currentBottomContainer.classList.add('active');
 	}
 
