@@ -230,32 +230,35 @@
         /* 容器的 top 和 left 位置由 JavaScript 动态设置，不再固定 */
         
         .container img {
-            width: 100%;
-            height: 100%;
+            width: 150%;
+            height: 150%;
             object-fit: contain;
             z-index: 1001;
-            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         /* B开头的图片样式 - top容器 */
         .container-top img {
-            width: 100%;
-            height: 100%;
+            width: 150%;
+            height: 150%;
             object-fit: contain;
             display: block;
         }
 
         /* A开头的图片样式 - bottom容器 */
         .container-bottom img {
-            width: 100%;
-            height: 100%;
+            width: 150%;
+            height: 150%;
             object-fit: contain;
         }
         
         .container h3 {
-            position: fixed;
-            top: 15px;
-            left: 15px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
             margin: 0;
             font-size: 16px;
             z-index: 1002;
