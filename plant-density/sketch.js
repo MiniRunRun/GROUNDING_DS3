@@ -328,6 +328,7 @@ function updateContainers(segment) {
 
 		currentTopContainer.style.top = `${topTop}px`;
 		currentTopContainer.style.left = `${topLeft}px`;
+		currentTopContainer.style.zIndex = 1000 + (segment * 2);
 		currentTopContainer.classList.add('active');
 
 		// 添加到已存在容器列表
@@ -376,6 +377,7 @@ function updateContainers(segment) {
 
 		currentBottomContainer.style.top = `${bottomTop}px`;
 		currentBottomContainer.style.left = `${bottomLeft}px`;
+		currentBottomContainer.style.zIndex = 1000 + (segment * 2) + 1;
 		currentBottomContainer.classList.add('active');
 	} else if (currentTopContainer) {
 		// 如果只有top容器 (472x517)
@@ -418,6 +420,7 @@ function updateContainers(segment) {
 
 		currentTopContainer.style.top = `${topTop}px`;
 		currentTopContainer.style.left = `${topLeft}px`;
+		currentTopContainer.style.zIndex = 1000 + (segment * 2);
 		currentTopContainer.classList.add('active');
 	} else if (currentBottomContainer) {
 		// 如果只有bottom容器 (420x465)
@@ -460,6 +463,7 @@ function updateContainers(segment) {
 
 		currentBottomContainer.style.top = `${bottomTop}px`;
 		currentBottomContainer.style.left = `${bottomLeft}px`;
+		currentBottomContainer.style.zIndex = 1000 + (segment * 2) + 1;
 		currentBottomContainer.classList.add('active');
 	}
 
