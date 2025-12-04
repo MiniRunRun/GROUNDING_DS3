@@ -4,8 +4,8 @@ const pointSize = 3.1;
 // 自动旋转控制变量
 let autoRotate = true;
 let rotationAngle = 0;
-let rotationSpeed = 0.005; // 初始旋转速度 - 减慢
-let totalRotation = Math.PI; // 半圈 - 减少一半
+let rotationSpeed = 0.003; // 初始旋转速度 - 较慢
+let totalRotation = 2 * Math.PI; // 完整一圈
 let rotationComplete = false; // 初始旋转是否完成
 let isDragging = false; // 是否正在拖拽
 
@@ -18,7 +18,6 @@ const totalSegments = 10; // 总共10个段落
 const segmentAngle = (2 * Math.PI) / totalSegments; // 每段角度
 let currentSegment = 0; // 当前段落
 let previousSegment = -1; // 上一个段落
-let currentZIndex = 1000; // 全局 z-index 计数器，确保新容器始终在最上层
 
 // 渐变颜色定义
 const gradientColors = [
@@ -139,7 +138,7 @@ function setup() {
 }
 
 function draw() {
-	background(107, 186, 255); // 天蓝色
+	background(107, 186, 255); // 天蓝色 RGB(107, 186, 255)
 	
 	// 初始自动旋转一圈
 	if (autoRotate && !rotationComplete) {
@@ -249,225 +248,20 @@ function parsePointCloud(data, scale, xAdd, yAdd, zAdd) {
 
 // 容器更新函数
 function updateContainers(segment) {
-	// 不再隐藏容器，而是累积显示
-
-	// 检查当前段落的容器是否已经显示过
-	const currentTopContainer = document.getElementById(`container-${segment + 1}-top`);
-	const currentBottomContainer = document.getElementById(`container-${segment + 1}-bottom`);
-
-	// 如果当前容器已经激活，直接返回，不重复定位
-	if ((currentTopContainer && currentTopContainer.classList.contains('active')) ||
-	    (currentBottomContainer && currentBottomContainer.classList.contains('active'))) {
-		console.log("段落", segment + 1, "已显示，跳过");
-		return;
-	}
-
-	// 收集所有已显示容器的位置信息
-	let existingContainers = [];
-	for (let i = 0; i < segment; i++) {
+	// 隐藏所有容器
+	for (let i = 0; i < totalSegments; i++) {
 		const topContainer = document.getElementById(`container-${i + 1}-top`);
 		const bottomContainer = document.getElementById(`container-${i + 1}-bottom`);
-
-		if (topContainer && topContainer.classList.contains('active')) {
-			existingContainers.push({
-				left: parseFloat(topContainer.style.left),
-				top: parseFloat(topContainer.style.top),
-				width: 472,
-				height: 517
-			});
-		}
-
-		if (bottomContainer && bottomContainer.classList.contains('active')) {
-			existingContainers.push({
-				left: parseFloat(bottomContainer.style.left),
-				top: parseFloat(bottomContainer.style.top),
-				width: 420,
-				height: 465
-			});
-		}
+		if (topContainer) topContainer.classList.remove('active');
+		if (bottomContainer) bottomContainer.classList.remove('active');
 	}
-
-	if (currentTopContainer && currentBottomContainer) {
-		// 设置第一个容器的随机位置 - top容器 (472x517)
-		const topWidth = 472;
-		const topHeight = 517;
-		const minDistance = 200;
-		let topTop, topLeft;
-		let attempts = 0;
-		const maxAttempts = 50;
-
-		// 找到不与现有容器重叠的位置
-		do {
-			topTop = Math.random() * (windowHeight - topHeight - 40) + 20;
-			topLeft = Math.random() * (windowWidth - topWidth - 40) + 20;
-
-			let validPosition = true;
-			const topCenterX = topLeft + topWidth / 2;
-			const topCenterY = topTop + topHeight / 2;
-
-			// 检查与所有已存在容器的距离
-			for (let existing of existingContainers) {
-				const existingCenterX = existing.left + existing.width / 2;
-				const existingCenterY = existing.top + existing.height / 2;
-				const distance = Math.sqrt(
-					Math.pow(topCenterX - existingCenterX, 2) +
-					Math.pow(topCenterY - existingCenterY, 2)
-				);
-
-				if (distance < minDistance) {
-					validPosition = false;
-					break;
-				}
-			}
-
-			if (validPosition) {
-				break;
-			}
-
-			attempts++;
-		} while (attempts < maxAttempts);
-
-		currentTopContainer.style.top = `${topTop}px`;
-		currentTopContainer.style.left = `${topLeft}px`;
-		currentTopContainer.style.zIndex = currentZIndex++;
-		currentTopContainer.classList.add('active');
-
-		// 添加到已存在容器列表
-		existingContainers.push({
-			left: topLeft,
-			top: topTop,
-			width: topWidth,
-			height: topHeight
-		});
-
-		// 设置第二个容器的随机位置 - bottom容器 (420x465)，确保不重叠
-		const bottomWidth = 420;
-		const bottomHeight = 465;
-		let bottomTop, bottomLeft;
-		attempts = 0;
-
-		do {
-			bottomTop = Math.random() * (windowHeight - bottomHeight - 40) + 20;
-			bottomLeft = Math.random() * (windowWidth - bottomWidth - 40) + 20;
-
-			let validPosition = true;
-			const bottomCenterX = bottomLeft + bottomWidth / 2;
-			const bottomCenterY = bottomTop + bottomHeight / 2;
-
-			// 检查与所有已存在容器的距离（包括刚添加的top容器）
-			for (let existing of existingContainers) {
-				const existingCenterX = existing.left + existing.width / 2;
-				const existingCenterY = existing.top + existing.height / 2;
-				const distance = Math.sqrt(
-					Math.pow(bottomCenterX - existingCenterX, 2) +
-					Math.pow(bottomCenterY - existingCenterY, 2)
-				);
-
-				if (distance < minDistance) {
-					validPosition = false;
-					break;
-				}
-			}
-
-			if (validPosition) {
-				break;
-			}
-
-			attempts++;
-		} while (attempts < maxAttempts);
-
-		currentBottomContainer.style.top = `${bottomTop}px`;
-		currentBottomContainer.style.left = `${bottomLeft}px`;
-		currentBottomContainer.style.zIndex = currentZIndex++;
-		currentBottomContainer.classList.add('active');
-	} else if (currentTopContainer) {
-		// 如果只有top容器 (472x517)
-		const topWidth = 472;
-		const topHeight = 517;
-		const minDistance = 200;
-		let topTop, topLeft;
-		let attempts = 0;
-		const maxAttempts = 50;
-
-		do {
-			topTop = Math.random() * (windowHeight - topHeight - 40) + 20;
-			topLeft = Math.random() * (windowWidth - topWidth - 40) + 20;
-
-			let validPosition = true;
-			const topCenterX = topLeft + topWidth / 2;
-			const topCenterY = topTop + topHeight / 2;
-
-			// 检查与所有已存在容器的距离
-			for (let existing of existingContainers) {
-				const existingCenterX = existing.left + existing.width / 2;
-				const existingCenterY = existing.top + existing.height / 2;
-				const distance = Math.sqrt(
-					Math.pow(topCenterX - existingCenterX, 2) +
-					Math.pow(topCenterY - existingCenterY, 2)
-				);
-
-				if (distance < minDistance) {
-					validPosition = false;
-					break;
-				}
-			}
-
-			if (validPosition) {
-				break;
-			}
-
-			attempts++;
-		} while (attempts < maxAttempts);
-
-		currentTopContainer.style.top = `${topTop}px`;
-		currentTopContainer.style.left = `${topLeft}px`;
-		currentTopContainer.style.zIndex = currentZIndex++;
-		currentTopContainer.classList.add('active');
-	} else if (currentBottomContainer) {
-		// 如果只有bottom容器 (420x465)
-		const bottomWidth = 420;
-		const bottomHeight = 465;
-		const minDistance = 200;
-		let bottomTop, bottomLeft;
-		let attempts = 0;
-		const maxAttempts = 50;
-
-		do {
-			bottomTop = Math.random() * (windowHeight - bottomHeight - 40) + 20;
-			bottomLeft = Math.random() * (windowWidth - bottomWidth - 40) + 20;
-
-			let validPosition = true;
-			const bottomCenterX = bottomLeft + bottomWidth / 2;
-			const bottomCenterY = bottomTop + bottomHeight / 2;
-
-			// 检查与所有已存在容器的距离
-			for (let existing of existingContainers) {
-				const existingCenterX = existing.left + existing.width / 2;
-				const existingCenterY = existing.top + existing.height / 2;
-				const distance = Math.sqrt(
-					Math.pow(bottomCenterX - existingCenterX, 2) +
-					Math.pow(bottomCenterY - existingCenterY, 2)
-				);
-
-				if (distance < minDistance) {
-					validPosition = false;
-					break;
-				}
-			}
-
-			if (validPosition) {
-				break;
-			}
-
-			attempts++;
-		} while (attempts < maxAttempts);
-
-		currentBottomContainer.style.top = `${bottomTop}px`;
-		currentBottomContainer.style.left = `${bottomLeft}px`;
-		currentBottomContainer.style.zIndex = currentZIndex++;
-		currentBottomContainer.classList.add('active');
-	}
-
+	
+	// 显示当前段落的容器
+	const currentTopContainer = document.getElementById(`container-${segment + 1}-top`);
+	const currentBottomContainer = document.getElementById(`container-${segment + 1}-bottom`);
+	if (currentTopContainer) currentTopContainer.classList.add('active');
+	if (currentBottomContainer) currentBottomContainer.classList.add('active');
+	
 	console.log("显示段落:", segment + 1);
 }
 

@@ -170,14 +170,6 @@
         }
 
         @font-face {
-            font-family: 'GT Pressura Extended Regular';
-            src: url('../typefaces/GT-Pressura/GT-Pressura-Extended-Regular-Trial.woff2') format('woff2');
-            font-weight: 500;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
             font-family: 'GT Pressura';
             src: url('../typefaces/GT-Pressura/GT-Pressura-Bold-Trial.woff2') format('woff2');
             font-weight: 700;
@@ -189,7 +181,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: rgb(129, 196, 255);
+            background-color: rgb(107, 186, 255);
         }
         canvas {
             display: block;
@@ -199,7 +191,9 @@
         .container {
             position: absolute;
             left: 70px;
-            background: rgb(107, 186, 255);
+            width: 210px;
+            height: 230px;
+            background: rgba(107, 186, 255, 0.8);
             border: 3px solid white;
             border-radius: 0px;
             z-index: 1000;
@@ -209,62 +203,53 @@
             box-sizing: border-box;
             color: white;
             font-family: 'GT Pressura', Arial, sans-serif;
-            overflow: hidden;
-        }
-
-        /* Top container - larger size (150% of original 315x345) */
-        .container-top {
-            width: 472px;
-            height: 517px;
-        }
-
-        /* Bottom container - different size (150% of original 280x310) */
-        .container-bottom {
-            width: 420px;
-            height: 465px;
         }
         
         .container.active {
             opacity: 1;
         }
         
-        /* 容器的 top 和 left 位置由 JavaScript 动态设置，不再固定 */
+        .container-top {
+            top: 70px;
+        }
+        
+        .container-bottom {
+            top: 310px;
+        }
         
         .container img {
-            width: 150%;
-            height: 150%;
-            object-fit: contain;
+            width: 100%;
+            max-width: 220px;
+            margin: 5px 0;
             z-index: 1001;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: relative;
         }
-
-        /* B开头的图片样式 - top容器 */
+        
+        /* B开头的图片样式 - 更小，位置稍微往下，居中显示 */
         .container-top img {
             width: 80%;
-            height: 80%;
-            object-fit: contain;
+            max-width: 140px;
+            margin: 0px auto 5px auto;
             display: block;
         }
-
-        /* A开头的图片样式 - bottom容器 */
+        
+        /* A开头的图片样式 - 往上移动一点，但不超过container */
         .container-bottom img {
-            width: 150%;
-            height: 150%;
-            object-fit: contain;
+            margin: -8px 0 5px 0;
+            max-height: 120px; /* 限制最大高度 */
+            object-fit: contain; /* 保持图片比例，不超出容器 */
+        }
+        
+        /* 为A-06单独设置样式，让它更往上 */
+        #container-6-bottom img {
+            margin: -22px 0 5px 0;
         }
         
         .container h3 {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            margin: 0;
+            margin: 0 0 8px 0;
             font-size: 16px;
-            z-index: 1002;
-            background: rgb(107, 186, 255);
-            padding: 5px;
+            z-index: 1001;
+            position: relative;
         }
         
         .container p {
@@ -347,7 +332,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgb(107, 186, 255);
+            background: rgba(107, 186, 255, 1);
             z-index: 2000;
             display: flex;
             justify-content: center;
@@ -393,7 +378,7 @@
         }
 
         .intro-screen-text {
-            font-family: 'GT Pressura Extended Regular', sans-serif;
+            font-family: 'GT Pressura', sans-serif;
             color: #000;
             font-weight: 500;
             text-align: center;
@@ -407,7 +392,7 @@
         }
 
         .intro-screen-text > span {
-            font-family: 'GT Pressura Extended Regular', sans-serif;
+            font-family: 'GT Pressura', sans-serif;
             display: inline-flex;
             align-items: center;
             justify-content: center;
