@@ -297,7 +297,7 @@ function updateContainers(segment) {
 
 		// 找到不与现有容器重叠的位置
 		do {
-			topTop = Math.random() * (windowHeight - topHeight - 100) + 50;
+			topTop = Math.random() * (windowHeight - topHeight - 40) + 20;
 			topLeft = Math.random() * (windowWidth - topWidth - 40) + 20;
 
 			let validPosition = true;
@@ -346,7 +346,7 @@ function updateContainers(segment) {
 		attempts = 0;
 
 		do {
-			bottomTop = Math.random() * (windowHeight - bottomHeight - 100) + 50;
+			bottomTop = Math.random() * (windowHeight - bottomHeight - 40) + 20;
 			bottomLeft = Math.random() * (windowWidth - bottomWidth - 40) + 20;
 
 			let validPosition = true;
@@ -389,7 +389,7 @@ function updateContainers(segment) {
 		const maxAttempts = 50;
 
 		do {
-			topTop = Math.random() * (windowHeight - topHeight - 100) + 50;
+			topTop = Math.random() * (windowHeight - topHeight - 40) + 20;
 			topLeft = Math.random() * (windowWidth - topWidth - 40) + 20;
 
 			let validPosition = true;
@@ -432,7 +432,7 @@ function updateContainers(segment) {
 		const maxAttempts = 50;
 
 		do {
-			bottomTop = Math.random() * (windowHeight - bottomHeight - 100) + 50;
+			bottomTop = Math.random() * (windowHeight - bottomHeight - 40) + 20;
 			bottomLeft = Math.random() * (windowWidth - bottomWidth - 40) + 20;
 
 			let validPosition = true;
