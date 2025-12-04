@@ -199,9 +199,7 @@
         .container {
             position: absolute;
             left: 70px;
-            width: 210px;
-            height: 230px;
-            background: rgba(135, 206, 235, 0.8);
+            background: rgb(135, 206, 235);
             border: 3px solid white;
             border-radius: 0px;
             z-index: 1000;
@@ -211,6 +209,18 @@
             box-sizing: border-box;
             color: white;
             font-family: 'GT Pressura', Arial, sans-serif;
+        }
+
+        /* Top container - larger size */
+        .container-top {
+            width: 315px;
+            height: 345px;
+        }
+
+        /* Bottom container - different size */
+        .container-bottom {
+            width: 280px;
+            height: 310px;
         }
         
         .container.active {

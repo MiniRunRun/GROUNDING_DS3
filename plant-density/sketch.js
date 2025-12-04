@@ -4,8 +4,8 @@ const pointSize = 3.1;
 // 自动旋转控制变量
 let autoRotate = true;
 let rotationAngle = 0;
-let rotationSpeed = 0.01; // 初始旋转速度 - 较快
-let totalRotation = 2 * Math.PI; // 完整一圈
+let rotationSpeed = 0.005; // 初始旋转速度 - 减慢
+let totalRotation = Math.PI; // 半圈 - 减少一半
 let rotationComplete = false; // 初始旋转是否完成
 let isDragging = false; // 是否正在拖拽
 
@@ -260,19 +260,61 @@ function updateContainers(segment) {
 	const currentTopContainer = document.getElementById(`container-${segment + 1}-top`);
 	const currentBottomContainer = document.getElementById(`container-${segment + 1}-bottom`);
 
-	if (currentTopContainer) {
-		// 随机位置 - top容器
-		const randomTop = Math.random() * (windowHeight - 200) + 50; // 50px到(windowHeight-150)px之间
-		const randomLeft = Math.random() * (windowWidth - 250) + 20; // 20px到(windowWidth-230)px之间
+	if (currentTopContainer && currentBottomContainer) {
+		// 设置第一个容器的随机位置 - top容器 (315x345)
+		const topWidth = 315;
+		const topHeight = 345;
+		const topTop = Math.random() * (windowHeight - topHeight - 100) + 50;
+		const topLeft = Math.random() * (windowWidth - topWidth - 40) + 20;
+
+		currentTopContainer.style.top = `${topTop}px`;
+		currentTopContainer.style.left = `${topLeft}px`;
+		currentTopContainer.classList.add('active');
+
+		// 设置第二个容器的随机位置 - bottom容器 (280x310)，确保不重叠
+		const bottomWidth = 280;
+		const bottomHeight = 310;
+		const minDistance = 200;
+		let bottomTop, bottomLeft;
+		let attempts = 0;
+		const maxAttempts = 50;
+
+		do {
+			bottomTop = Math.random() * (windowHeight - bottomHeight - 100) + 50;
+			bottomLeft = Math.random() * (windowWidth - bottomWidth - 40) + 20;
+
+			// 计算两个容器中心点之间的距离
+			const topCenterX = topLeft + topWidth / 2;
+			const topCenterY = topTop + topHeight / 2;
+			const bottomCenterX = bottomLeft + bottomWidth / 2;
+			const bottomCenterY = bottomTop + bottomHeight / 2;
+
+			const distance = Math.sqrt(
+				Math.pow(topCenterX - bottomCenterX, 2) +
+				Math.pow(topCenterY - bottomCenterY, 2)
+			);
+
+			if (distance >= minDistance) {
+				break;
+			}
+
+			attempts++;
+		} while (attempts < maxAttempts);
+
+		currentBottomContainer.style.top = `${bottomTop}px`;
+		currentBottomContainer.style.left = `${bottomLeft}px`;
+		currentBottomContainer.classList.add('active');
+	} else if (currentTopContainer) {
+		// 如果只有top容器
+		const randomTop = Math.random() * (windowHeight - 395) + 50;
+		const randomLeft = Math.random() * (windowWidth - 355) + 20;
 		currentTopContainer.style.top = `${randomTop}px`;
 		currentTopContainer.style.left = `${randomLeft}px`;
 		currentTopContainer.classList.add('active');
-	}
-
-	if (currentBottomContainer) {
-		// 随机位置 - bottom容器
-		const randomTop = Math.random() * (windowHeight - 200) + 50;
-		const randomLeft = Math.random() * (windowWidth - 250) + 20;
+	} else if (currentBottomContainer) {
+		// 如果只有bottom容器
+		const randomTop = Math.random() * (windowHeight - 360) + 50;
+		const randomLeft = Math.random() * (windowWidth - 320) + 20;
 		currentBottomContainer.style.top = `${randomTop}px`;
 		currentBottomContainer.style.left = `${randomLeft}px`;
 		currentBottomContainer.classList.add('active');
