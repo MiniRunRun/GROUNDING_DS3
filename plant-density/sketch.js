@@ -138,7 +138,7 @@ function setup() {
 }
 
 function draw() {
-	background (51, 197, 255); // 天蓝色 RGB(135, 206, 235)
+	background(41, 123, 255); // 天蓝色
 	
 	// 初始自动旋转一圈
 	if (autoRotate && !rotationComplete) {
@@ -250,6 +250,17 @@ function parsePointCloud(data, scale, xAdd, yAdd, zAdd) {
 function updateContainers(segment) {
 	// 不再隐藏容器，而是累积显示
 
+	// 检查当前段落的容器是否已经显示过
+	const currentTopContainer = document.getElementById(`container-${segment + 1}-top`);
+	const currentBottomContainer = document.getElementById(`container-${segment + 1}-bottom`);
+
+	// 如果当前容器已经激活，直接返回，不重复定位
+	if ((currentTopContainer && currentTopContainer.classList.contains('active')) ||
+	    (currentBottomContainer && currentBottomContainer.classList.contains('active'))) {
+		console.log("段落", segment + 1, "已显示，跳过");
+		return;
+	}
+
 	// 收集所有已显示容器的位置信息
 	let existingContainers = [];
 	for (let i = 0; i < segment; i++) {
@@ -274,10 +285,6 @@ function updateContainers(segment) {
 			});
 		}
 	}
-
-	// 显示当前段落的容器并随机定位
-	const currentTopContainer = document.getElementById(`container-${segment + 1}-top`);
-	const currentBottomContainer = document.getElementById(`container-${segment + 1}-bottom`);
 
 	if (currentTopContainer && currentBottomContainer) {
 		// 设置第一个容器的随机位置 - top容器 (472x517)
