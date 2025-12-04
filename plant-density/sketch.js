@@ -261,9 +261,9 @@ function updateContainers(segment) {
 	const currentBottomContainer = document.getElementById(`container-${segment + 1}-bottom`);
 
 	if (currentTopContainer && currentBottomContainer) {
-		// 设置第一个容器的随机位置 - top容器 (315x345)
-		const topWidth = 315;
-		const topHeight = 345;
+		// 设置第一个容器的随机位置 - top容器 (472x517)
+		const topWidth = 472;
+		const topHeight = 517;
 		const topTop = Math.random() * (windowHeight - topHeight - 100) + 50;
 		const topLeft = Math.random() * (windowWidth - topWidth - 40) + 20;
 
@@ -271,9 +271,9 @@ function updateContainers(segment) {
 		currentTopContainer.style.left = `${topLeft}px`;
 		currentTopContainer.classList.add('active');
 
-		// 设置第二个容器的随机位置 - bottom容器 (280x310)，确保不重叠
-		const bottomWidth = 280;
-		const bottomHeight = 310;
+		// 设置第二个容器的随机位置 - bottom容器 (420x465)，确保不重叠
+		const bottomWidth = 420;
+		const bottomHeight = 465;
 		const minDistance = 200;
 		let bottomTop, bottomLeft;
 		let attempts = 0;
@@ -305,16 +305,16 @@ function updateContainers(segment) {
 		currentBottomContainer.style.left = `${bottomLeft}px`;
 		currentBottomContainer.classList.add('active');
 	} else if (currentTopContainer) {
-		// 如果只有top容器
-		const randomTop = Math.random() * (windowHeight - 395) + 50;
-		const randomLeft = Math.random() * (windowWidth - 355) + 20;
+		// 如果只有top容器 (472x517)
+		const randomTop = Math.random() * (windowHeight - 567) + 50;
+		const randomLeft = Math.random() * (windowWidth - 512) + 20;
 		currentTopContainer.style.top = `${randomTop}px`;
 		currentTopContainer.style.left = `${randomLeft}px`;
 		currentTopContainer.classList.add('active');
 	} else if (currentBottomContainer) {
-		// 如果只有bottom容器
-		const randomTop = Math.random() * (windowHeight - 360) + 50;
-		const randomLeft = Math.random() * (windowWidth - 320) + 20;
+		// 如果只有bottom容器 (420x465)
+		const randomTop = Math.random() * (windowHeight - 515) + 50;
+		const randomLeft = Math.random() * (windowWidth - 460) + 20;
 		currentBottomContainer.style.top = `${randomTop}px`;
 		currentBottomContainer.style.left = `${randomLeft}px`;
 		currentBottomContainer.classList.add('active');
