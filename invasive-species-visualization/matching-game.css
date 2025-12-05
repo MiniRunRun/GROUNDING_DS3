@@ -722,6 +722,11 @@ body {
     cursor: pointer;
     z-index: 20000;
     transition: transform 0.2s ease;
+    display: none;
+}
+
+.info-modal-button.visible {
+    display: block;
 }
 
 .info-modal-button:hover {

@@ -487,12 +487,20 @@ function setupIntroAnimation() {
     const handleAnimEnd = () => {
       introScreen.removeEventListener('animationend', handleAnimEnd);
       introScreen.style.display = 'none';
+
+      // 显示 modal button
+      const modalButton = document.getElementById('modalButton');
+      if (modalButton) modalButton.classList.add('visible');
     };
     introScreen.addEventListener('animationend', handleAnimEnd);
 
     // safety fallback: remove if no animationend fires
     setTimeout(() => {
       introScreen.style.display = 'none';
+
+      // 显示 modal button (fallback)
+      const modalButton = document.getElementById('modalButton');
+      if (modalButton) modalButton.classList.add('visible');
     }, wipeAnimDurationMs + 150);
   }, maxDuration + bufferAfterTyping);
 }

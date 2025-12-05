@@ -441,6 +441,11 @@ body {
     cursor: pointer;
     z-index: 20000;
     transition: transform 0.2s ease;
+    display: none; /* 初始隐藏 */
+}
+
+.modal-button.visible {
+    display: block;
 }
 
 .modal-button:hover {

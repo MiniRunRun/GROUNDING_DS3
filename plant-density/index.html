@@ -60,10 +60,14 @@
                 const handleAnimEnd = () => {
                     introScreen.removeEventListener('animationend', handleAnimEnd);
                     introScreen.style.display = 'none';
-                    
+
                     const titleBox = document.getElementById('title-box');
                     if (titleBox) titleBox.style.display = 'flex';
-                    
+
+                    // 显示 info button
+                    const infoButton = document.getElementById('infoButton');
+                    if (infoButton) infoButton.classList.add('visible');
+
                     setTimeout(() => {
                         const usageText = document.getElementById('intro-text');
                         if (usageText) {
@@ -251,7 +255,9 @@
             position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
             border-radius: 50%; background: white; border: 2px solid white;
             cursor: pointer; z-index: 20000; transition: transform 0.2s ease;
+            display: none; /* 初始隐藏 */
         }
+        .info-button.visible { display: block; }
         .info-button:hover { transform: scale(1.1); }
     </style>
 </head>

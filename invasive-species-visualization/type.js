@@ -56,12 +56,18 @@
       const handleAnimEnd = () => {
         introScreen.removeEventListener('animationend', handleAnimEnd);
         introScreen.style.display = 'none';
+        // Show the info modal button
+        const button = document.getElementById('infoModalButton');
+        if (button) button.classList.add('visible');
       };
       introScreen.addEventListener('animationend', handleAnimEnd);
-  
+
       // safety fallback: remove if no animationend fires
       setTimeout(() => {
         introScreen.style.display = 'none';
+        // Show the info modal button
+        const button = document.getElementById('infoModalButton');
+        if (button) button.classList.add('visible');
       }, wipeAnimDurationMs + 150);
     }, maxDuration + bufferAfterTyping);
   }

@@ -53,12 +53,18 @@ function setupIntroAnimation() {
         const handleAnimEnd = () => {
             introScreen.removeEventListener('animationend', handleAnimEnd);
             introScreen.style.display = 'none';
+            // Show the modal button
+            const button = document.getElementById('modalButton');
+            if (button) button.classList.add('visible');
         };
         introScreen.addEventListener('animationend', handleAnimEnd);
 
         // safety fallback: remove if no animationend fires
         setTimeout(() => {
             introScreen.style.display = 'none';
+            // Show the modal button
+            const button = document.getElementById('modalButton');
+            if (button) button.classList.add('visible');
         }, wipeAnimDurationMs + 150);
     }, maxDuration + bufferAfterTyping);
 }
