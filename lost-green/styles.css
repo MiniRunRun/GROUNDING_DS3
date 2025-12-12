@@ -146,7 +146,7 @@ body {
     height: 100vh;
     top: 0;
     left: 0;
-    background-image: url('images/1_2.png');
+    background-image: url('images/map.jpg');
     background-size: cover;
     background-position: center;
     overflow: visible;
@@ -358,13 +358,8 @@ body {
     background: white;
     border: 2px solid white;
     cursor: pointer;
-    z-index: 20000;
+    z-index: 1000;
     transition: transform 0.2s ease;
-    display: none;
-}
-
-.modal-button.visible {
-    display: block;
 }
 
 .modal-button:hover {

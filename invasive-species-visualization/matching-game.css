@@ -720,13 +720,8 @@ body {
     background: white;
     border: 2px solid white;
     cursor: pointer;
-    z-index: 20000;
+    z-index: 1000;
     transition: transform 0.2s ease;
-    display: none;
-}
-
-.info-modal-button.visible {
-    display: block;
 }
 
 .info-modal-button:hover {

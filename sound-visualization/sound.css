@@ -439,13 +439,8 @@ body {
     background: white;
     border: 2px solid white;
     cursor: pointer;
-    z-index: 20000;
+    z-index: 1000;
     transition: transform 0.2s ease;
-    display: none; /* 初始隐藏 */
-}
-
-.modal-button.visible {
-    display: block;
 }
 
 .modal-button:hover {
